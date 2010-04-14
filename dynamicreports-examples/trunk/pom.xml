@@ -6,12 +6,12 @@
 
 	<groupId>net.sourceforge.dynamicreports</groupId>
 	<artifactId>dynamicreports-examples</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<packaging>jar</packaging>
 
 	<name>DynamicReports - examples</name>
 	<url>http://dynamicreports.sourceforge.net</url>
-	<description>DynamicReports for JasperReports</description>
+	<description>DynamicReports - examples</description>
 	<licenses>
 		<license>
 			<name>GNU Lesser General Public License</name>
@@ -29,7 +29,7 @@
 		<dependency>
 			<groupId>net.sourceforge.dynamicreports</groupId>
 			<artifactId>dynamicreports</artifactId>
-			<version>1.0.0</version>
+			<version>1.0.1</version>
 		</dependency>     
 	</dependencies>
 
