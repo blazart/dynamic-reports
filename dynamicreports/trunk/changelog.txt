@@ -1,7 +1,11 @@
 DynamicReports Change Log
 =========================
 
-DynamicReports 1.0.0
+DynamicReports 1.0.1
+---------------------------------------------------
+- new exporter added - to png
+
+DynamicReports 1.0.0 (2010-03-31)
 ---------------------------------------------------
 supports
 - column grid

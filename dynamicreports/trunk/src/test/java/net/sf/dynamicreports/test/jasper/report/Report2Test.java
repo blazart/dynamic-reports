@@ -19,63 +19,66 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
  * USA. 
  */
-package net.sf.dynamicreports.test.jasper.group;
+package net.sf.dynamicreports.test.jasper.report;
 
 import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 
-import java.util.Locale;
+import java.io.Serializable;
 
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
-import net.sf.dynamicreports.report.builder.column.PercentageColumnBuilder;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
-import net.sf.dynamicreports.report.constant.PercentageTotalType;
-import net.sf.dynamicreports.test.jasper.AbstractJasperValueTest;
+import net.sf.dynamicreports.report.builder.subtotal.AggregationSubtotalBuilder;
+import net.sf.dynamicreports.test.jasper.AbstractJasperPositionTest;
 import net.sf.dynamicreports.test.jasper.DataSource;
 import net.sf.jasperreports.engine.JRDataSource;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class PercentageGroupTest extends AbstractJasperValueTest {
-	private PercentageColumnBuilder percentage1;
-	private PercentageColumnBuilder percentage2;
+public class Report2Test extends AbstractJasperPositionTest implements Serializable {
+	private static final long serialVersionUID = 1L;
+		
+	private AggregationSubtotalBuilder<Integer> subtotal1;
+	private AggregationSubtotalBuilder<Integer> subtotal2;
 	
 	@Override
-	protected void configureReport(JasperReportBuilder rb) {		
-		TextColumnBuilder<String> column1;
-		TextColumnBuilder<Integer> column2;
+	protected void configureReport(JasperReportBuilder rb) {
+		TextColumnBuilder<Integer> column1;
 		
-		rb.setLocale(Locale.ENGLISH)
+		rb.setTitleOnANewPage(true)
+			.setSummaryOnANewPage(true)
+			.setFloatColumnFooter(true)
 			.columns(
-					column1 = col.column("Column1", "field1", String.class),
-					column2 = col.column("Column2", "field2", Integer.class),
-					percentage1 = col.percentageColumn(column2),
-					percentage2 = col.percentageColumn(column2).setTotalType(PercentageTotalType.REPORT))
-			.groupBy(column1);
+					column1 = col.column("Column1", "field1", Integer.class))
+			.subtotalsAtColumnFooter(
+					subtotal1 = sbt.sum(column1))
+			.subtotalsAtSummary(
+					subtotal2 = sbt.sum(column1))
+			.title(cmp.text("title"));		
 	}
 
 	@Override
 	public void test() {
 		super.test();
 		
-		numberOfPagesTest(1);
-		//percentage1
-		columnDetailCountTest(percentage1, 6);
-		columnDetailValueTest(percentage1, "16.67%", "33.33%", "50.00%", "26.67%", "33.33%", "40.00%");
-		//percentage2
-		columnDetailCountTest(percentage2, 6);
-		columnDetailValueTest(percentage2, "4.76%", "9.52%", "14.29%", "19.05%", "23.81%", "28.57%");
+		numberOfPagesTest(3);
+		
+		//title
+		elementPositionTest("title.textField1", 0, 10, 10, 575, 16);
+		
+		//column footer
+		subtotalPositionTest(subtotal1, 0, 10, 186, 575, 16);
+
+		//summary
+		subtotalPositionTest(subtotal2, 0, 10, 10, 575, 16);
 	}
 	
 	@Override
 	protected JRDataSource createDataSource() {
-		DataSource dataSource = new DataSource("field1", "field2");
-		for (int i = 1; i <= 3; i++) {
-			dataSource.add("group1", i);
+		DataSource dataSource = new DataSource("field1");
+		for (int i = 0; i < 10; i++) {
+			dataSource.add(i);
 		}
-		for (int i = 4; i <= 6; i++) {
-			dataSource.add("group2", i);
-		}	
 		return dataSource;
 	}
 }
