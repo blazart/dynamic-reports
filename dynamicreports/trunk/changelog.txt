@@ -5,7 +5,7 @@ DynamicReports 1.0.1 (2010-04-21)
 ---------------------------------------------------
 - added examples
 - added exporter - to png
-- fixed bug - can´t find dynamicreports-defaults.xml on the server
+- fixed bug - can't find dynamicreports-defaults.xml on the server
 
 DynamicReports 1.0.0 (2010-03-31)
 ---------------------------------------------------
