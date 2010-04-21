@@ -1,0 +1,51 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>net.sourceforge.dynamicreports</groupId>
+	<artifactId>dynamicreports-examples</artifactId>
+	<version>1.0.1</version>
+	<packaging>jar</packaging>
+
+	<name>DynamicReports - examples</name>
+	<url>http://dynamicreports.sourceforge.net</url>
+	<description>DynamicReports - examples</description>
+	<licenses>
+		<license>
+			<name>GNU Lesser General Public License</name>
+			<url>http://www.gnu.org/licenses/lgpl.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+	<scm>
+		<connection>scm:svn:http://dynamicreports.svn.sourceforge.net/svnroot/dynamicreports/dynamicreports-examples/trunk</connection>
+		<developerConnection>scm:svn:http://dynamicreports.svn.sourceforge.net/svnroot/dynamicreports/dynamicreports-examples/trunk</developerConnection>
+		<url>http://dynamicreports.svn.sourceforge.net</url>
+	</scm>
+	
+	<dependencies>
+		<dependency>
+			<groupId>net.sourceforge.dynamicreports</groupId>
+			<artifactId>dynamicreports</artifactId>
+			<version>1.0.1</version>
+		</dependency>     
+	</dependencies>
+
+	<build>
+		<plugins>		
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<encoding>UTF-8</encoding>
+					<source>1.5</source>
+					<target>1.5</target>
+					<fork>true</fork>
+					<executable>${JAVA_1_5_HOME}/bin/javac</executable>
+				</configuration>
+			</plugin>			
+		</plugins>
+	</build>
+</project>
