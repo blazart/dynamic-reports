@@ -1,9 +1,11 @@
 DynamicReports Change Log
 =========================
 
-DynamicReports 1.0.1
+DynamicReports 1.0.1 (2010-04-21)
 ---------------------------------------------------
-- new exporter added - to png
+- added examples
+- added exporter - to png
+- fixed bug - can´t find dynamicreports-defaults.xml on the server
 
 DynamicReports 1.0.0 (2010-03-31)
 ---------------------------------------------------

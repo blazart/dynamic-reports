@@ -34,9 +34,11 @@ import javax.imageio.ImageIO;
 
 import net.sf.dynamicreports.design.base.DRDesignReport;
 import net.sf.dynamicreports.jasper.base.JasperReportDesign;
+import net.sf.dynamicreports.report.builder.DynamicReports;
 import net.sf.dynamicreports.report.builder.QueryBuilder;
 import net.sf.dynamicreports.report.builder.ReportBuilder;
 import net.sf.dynamicreports.report.constant.Constants;
+import net.sf.dynamicreports.report.constant.QueryLanguage;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JRException;
@@ -85,6 +87,11 @@ public class JasperReportBuilder extends ReportBuilder<JasperReportBuilder> {
 	
 	public JasperReportBuilder setDataSource(ResultSet resultSet) {
 		return setDataSource(new JRResultSetDataSource(resultSet));
+	}
+	
+	public JasperReportBuilder setDataSource(String sql, Connection connection) {	
+		Validate.notNull(sql, "sql must not be null");
+		return setDataSource(DynamicReports.query(sql, QueryLanguage.SQL), connection);
 	}
 	
 	public JasperReportBuilder setDataSource(QueryBuilder query, Connection connection) {	
