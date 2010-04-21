@@ -27,37 +27,54 @@ import java.awt.Color;
 import java.math.BigDecimal;
 
 import net.sf.dynamicreports.examples.DataSource;
+import net.sf.dynamicreports.examples.Templates;
+import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
 import net.sf.dynamicreports.report.builder.chart.Bar3DChartBuilder;
 import net.sf.dynamicreports.report.builder.column.PercentageColumnBuilder;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
+import net.sf.dynamicreports.report.builder.datatype.BigDecimalType;
 import net.sf.dynamicreports.report.builder.group.ColumnGroupBuilder;
+import net.sf.dynamicreports.report.builder.style.ConditionalStyleBuilder;
 import net.sf.dynamicreports.report.builder.style.StyleBuilder;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.constant.VerticalAlignment;
+import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class SimpleReport_Step8 {
+public class SimpleReport_Step11 {
+	private TextColumnBuilder<BigDecimal> priceColumn;
 	
-	public SimpleReport_Step8() {
+	public SimpleReport_Step11() {
 		build();
 	}
 	
 	private void build() {
+		CurrencyType currencyType = new CurrencyType();
+		
 		StyleBuilder boldStyle         = stl.style().bold();
 		StyleBuilder boldCenteredStyle = stl.style(boldStyle).setHorizontalAlignment(HorizontalAlignment.CENTER);
 		StyleBuilder columnTitleStyle  = stl.style(boldCenteredStyle)
 		                                    .setBorder(stl.pen1Point())		                                    
-		                                    .setBackgroundColor(Color.LIGHT_GRAY);	
+		                                    .setBackgroundColor(Color.LIGHT_GRAY);
+		StyleBuilder titleStyle        = stl.style(boldCenteredStyle)
+		                                    .setVerticalAlignment(VerticalAlignment.MIDDLE)
+		                                    .setFontSize(15);
+		ConditionalStyleBuilder condition1 = stl.conditionalStyle(new Condition1())		
+		                                        .setBackgroundColor(new Color(0, 255, 0, 50));
+		ConditionalStyleBuilder condition2 = stl.conditionalStyle(new Condition2())
+                                            .setBackgroundColor(new Color(255, 0, 0, 50));
 		
 		//                                                           title,     field name     data type
 		TextColumnBuilder<String>     itemColumn      = col.column("Item",       "item",      type.stringType()).setStyle(boldStyle);
 		TextColumnBuilder<Integer>    quantityColumn  = col.column("Quantity",   "quantity",  type.integerType());
-		TextColumnBuilder<BigDecimal> unitPriceColumn = col.column("Unit price", "unitprice", type.bigDecimalType());
+		TextColumnBuilder<BigDecimal> unitPriceColumn = col.column("Unit price", "unitprice", currencyType);
 		//price = unitPrice * quantity
-		TextColumnBuilder<BigDecimal> priceColumn     = unitPriceColumn.multiply(quantityColumn).setTitle("Price");
+		priceColumn                                   = unitPriceColumn.multiply(quantityColumn).setTitle("Price")
+		                                                               .setDataType(Templates.currencyType);
 		PercentageColumnBuilder       pricePercColumn = col.percentageColumn("Price %", priceColumn);	
 		TextColumnBuilder<Integer>    rowNumberColumn = col.reportRowNumberColumn("No.")
 		                                                    //sets the fixed width of a column, width = 2 * character width
@@ -89,8 +106,17 @@ public class SimpleReport_Step8 {
 			  .subtotalsAtSummary(
 			  		sbt.sum(unitPriceColumn), sbt.sum(priceColumn))
 			  .subtotalsAtFirstGroupFooter(
-			  		sbt.sum(unitPriceColumn), sbt.sum(priceColumn))			  
-			  .title(cmp.text("Getting started").setStyle(boldCenteredStyle))//shows report title
+			  		sbt.sum(unitPriceColumn), sbt.sum(priceColumn))			
+			  .detailRowHighlighters(
+			  		condition1, condition2)
+			  .title(//shows report title
+			  	cmp.horizontalList()
+			  		.add(
+			  			cmp.image(getClass().getResourceAsStream("../images/dynamicreports.png")).setFixedDimension(80, 80),
+			  			cmp.text("DynamicReports").setStyle(titleStyle).setHorizontalAlignment(HorizontalAlignment.LEFT),
+			  			cmp.text("Getting started").setStyle(titleStyle).setHorizontalAlignment(HorizontalAlignment.RIGHT))
+			  		.newRow()
+			  		.add(cmp.filler().setStyle(stl.style().setTopBorder(stl.pen2Point())).setFixedHeight(10)))			
 			  .pageFooter(cmp.pageXofY().setStyle(boldCenteredStyle))//shows number of page at page footer
 			  .summary(
 			  		cmp.horizontalList(itemChart, itemChart2))
@@ -98,6 +124,31 @@ public class SimpleReport_Step8 {
 			  .show();//create and show report						
 		} catch (DRException e) {
 			e.printStackTrace();	
+		}		
+	}
+	
+	private class CurrencyType extends BigDecimalType {
+		private static final long serialVersionUID = 1L;
+		
+		@Override
+		public String getPattern() {
+			return "$ #,###.00";
+		}
+	}
+	
+	private class Condition1 extends AbstractSimpleExpression<Boolean> {
+		private static final long serialVersionUID = 1L;
+
+		public Boolean evaluate(ReportParameters reportParameters) {
+			return reportParameters.getValue(priceColumn).doubleValue() > 150;
+		}		
+	}
+
+	private class Condition2 extends AbstractSimpleExpression<Boolean> {
+		private static final long serialVersionUID = 1L;
+
+		public Boolean evaluate(ReportParameters reportParameters) {
+			return reportParameters.getValue(priceColumn).doubleValue() < 30;
 		}		
 	}
 	
@@ -115,6 +166,6 @@ public class SimpleReport_Step8 {
 	}
 	
 	public static void main(String[] args) {
-		new SimpleReport_Step8();
+		new SimpleReport_Step11();
 	}
 }

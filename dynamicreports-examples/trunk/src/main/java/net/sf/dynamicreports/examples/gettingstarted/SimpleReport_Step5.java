@@ -86,9 +86,9 @@ public class SimpleReport_Step5 {
 		DataSource dataSource = new DataSource("item", "quantity", "unitprice");
 		dataSource.add("Notebook", 1, new BigDecimal(500));
 		dataSource.add("DVD", 5, new BigDecimal(30));
-		dataSource.add("DVD", 2, new BigDecimal(28));
-		dataSource.add("DVD", 4, new BigDecimal(32));
-		dataSource.add("Book", 2, new BigDecimal(11));
+		dataSource.add("DVD", 1, new BigDecimal(28));
+		dataSource.add("DVD", 5, new BigDecimal(32));
+		dataSource.add("Book", 3, new BigDecimal(11));
 		dataSource.add("Book", 1, new BigDecimal(15));
 		dataSource.add("Book", 5, new BigDecimal(10));
 		dataSource.add("Book", 8, new BigDecimal(9));

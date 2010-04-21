@@ -27,53 +27,102 @@ import java.awt.Color;
 import java.math.BigDecimal;
 
 import net.sf.dynamicreports.examples.DataSource;
+import net.sf.dynamicreports.examples.Templates;
+import net.sf.dynamicreports.report.builder.chart.Bar3DChartBuilder;
 import net.sf.dynamicreports.report.builder.column.PercentageColumnBuilder;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
+import net.sf.dynamicreports.report.builder.datatype.BigDecimalType;
+import net.sf.dynamicreports.report.builder.group.ColumnGroupBuilder;
 import net.sf.dynamicreports.report.builder.style.StyleBuilder;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.constant.VerticalAlignment;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class SimpleReport_Step4 {
+public class SimpleReport_Step10 {
 	
-	public SimpleReport_Step4() {
+	public SimpleReport_Step10() {
 		build();
 	}
 	
 	private void build() {
+		CurrencyType currencyType = new CurrencyType();
+		
 		StyleBuilder boldStyle         = stl.style().bold();
 		StyleBuilder boldCenteredStyle = stl.style(boldStyle).setHorizontalAlignment(HorizontalAlignment.CENTER);
 		StyleBuilder columnTitleStyle  = stl.style(boldCenteredStyle)
 		                                    .setBorder(stl.pen1Point())		                                    
-		                                    .setBackgroundColor(Color.LIGHT_GRAY);	
+		                                    .setBackgroundColor(Color.LIGHT_GRAY);
+		StyleBuilder titleStyle        = stl.style(boldCenteredStyle)
+		                                    .setVerticalAlignment(VerticalAlignment.MIDDLE)
+		                                    .setFontSize(15);
 		
 		//                                                           title,     field name     data type
 		TextColumnBuilder<String>     itemColumn      = col.column("Item",       "item",      type.stringType()).setStyle(boldStyle);
 		TextColumnBuilder<Integer>    quantityColumn  = col.column("Quantity",   "quantity",  type.integerType());
-		TextColumnBuilder<BigDecimal> unitPriceColumn = col.column("Unit price", "unitprice", type.bigDecimalType());
+		TextColumnBuilder<BigDecimal> unitPriceColumn = col.column("Unit price", "unitprice", currencyType);
 		//price = unitPrice * quantity
-		TextColumnBuilder<BigDecimal> priceColumn     = unitPriceColumn.multiply(quantityColumn).setTitle("Price");
+		TextColumnBuilder<BigDecimal> priceColumn     = unitPriceColumn.multiply(quantityColumn).setTitle("Price")
+		                                                               .setDataType(Templates.currencyType);
 		PercentageColumnBuilder       pricePercColumn = col.percentageColumn("Price %", priceColumn);	
 		TextColumnBuilder<Integer>    rowNumberColumn = col.reportRowNumberColumn("No.")
 		                                                    //sets the fixed width of a column, width = 2 * character width
 		                                                   .setFixedColumns(2)
-		                                                   .setHorizontalAlignment(HorizontalAlignment.CENTER);
+		                                                   .setHorizontalAlignment(HorizontalAlignment.CENTER);		
+		Bar3DChartBuilder itemChart = cht.bar3DChart()
+		                                 .setTitle("Sales by item")
+		                                 .setCategory(itemColumn)
+		                                 .addSerie(
+		                                	 cht.serie(unitPriceColumn), cht.serie(priceColumn));
+		Bar3DChartBuilder itemChart2 = cht.bar3DChart()
+		                                 .setTitle("Sales by item")
+		                                 .setCategory(itemColumn)
+		                                 .setUseSeriesAsCategory(true)
+		                                 .addSerie(
+		                                	 cht.serie(unitPriceColumn), cht.serie(priceColumn));
+		ColumnGroupBuilder itemGroup = grp.group(itemColumn);
+		itemGroup.setPrintSubtotalsWhenExpression(exp.printWhenGroupHasMoreThanOneRow(itemGroup));		
 		try {			
 			report()//create new report design
 			  .setColumnTitleStyle(columnTitleStyle)
+			  .setSubtotalStyle(boldStyle)
 			  .highlightDetailEvenRows()
 			  .columns(//add columns			  		
 			  		rowNumberColumn, itemColumn, quantityColumn, unitPriceColumn, priceColumn, pricePercColumn)
-			  .groupBy(itemColumn)
-			  .title(cmp.text("Getting started").setStyle(boldCenteredStyle))//shows report title
+			  .columnGrid(
+			  		rowNumberColumn, quantityColumn, unitPriceColumn, grid.verticalColumnGridList(priceColumn, pricePercColumn))
+			  .groupBy(itemGroup)
+			  .subtotalsAtSummary(
+			  		sbt.sum(unitPriceColumn), sbt.sum(priceColumn))
+			  .subtotalsAtFirstGroupFooter(
+			  		sbt.sum(unitPriceColumn), sbt.sum(priceColumn))			  		
+			  .title(//shows report title
+			  	cmp.horizontalList()
+			  		.add(
+			  			cmp.image(getClass().getResourceAsStream("../images/dynamicreports.png")).setFixedDimension(80, 80),
+			  			cmp.text("DynamicReports").setStyle(titleStyle).setHorizontalAlignment(HorizontalAlignment.LEFT),
+			  			cmp.text("Getting started").setStyle(titleStyle).setHorizontalAlignment(HorizontalAlignment.RIGHT))
+			  		.newRow()
+			  		.add(cmp.filler().setStyle(stl.style().setTopBorder(stl.pen2Point())).setFixedHeight(10)))			
 			  .pageFooter(cmp.pageXofY().setStyle(boldCenteredStyle))//shows number of page at page footer
+			  .summary(
+			  		cmp.horizontalList(itemChart, itemChart2))
 			  .setDataSource(createDataSource())//set datasource
 			  .show();//create and show report						
 		} catch (DRException e) {
 			e.printStackTrace();	
+		}		
+	}
+	
+	private class CurrencyType extends BigDecimalType {
+		private static final long serialVersionUID = 1L;
+		
+		@Override
+		public String getPattern() {
+			return "$ #,###.00";
 		}
 	}
 	
@@ -91,6 +140,6 @@ public class SimpleReport_Step4 {
 	}
 	
 	public static void main(String[] args) {
-		new SimpleReport_Step4();
+		new SimpleReport_Step10();
 	}
 }
