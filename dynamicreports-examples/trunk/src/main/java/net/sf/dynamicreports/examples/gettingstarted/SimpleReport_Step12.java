@@ -27,23 +27,27 @@ import java.awt.Color;
 import java.math.BigDecimal;
 
 import net.sf.dynamicreports.examples.DataSource;
+import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
 import net.sf.dynamicreports.report.builder.chart.Bar3DChartBuilder;
 import net.sf.dynamicreports.report.builder.column.PercentageColumnBuilder;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.builder.datatype.BigDecimalType;
 import net.sf.dynamicreports.report.builder.group.ColumnGroupBuilder;
+import net.sf.dynamicreports.report.builder.style.ConditionalStyleBuilder;
 import net.sf.dynamicreports.report.builder.style.StyleBuilder;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.constant.VerticalAlignment;
+import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class SimpleReport_Step10 {
+public class SimpleReport_Step12 {
+	private TextColumnBuilder<BigDecimal> priceColumn;
 	
-	public SimpleReport_Step10() {
+	public SimpleReport_Step12() {
 		build();
 	}
 	
@@ -58,14 +62,28 @@ public class SimpleReport_Step10 {
 		StyleBuilder titleStyle        = stl.style(boldCenteredStyle)
 		                                    .setVerticalAlignment(VerticalAlignment.MIDDLE)
 		                                    .setFontSize(15);
-		
+		ConditionalStyleBuilder condition1 = stl.conditionalStyle(new Condition1())		
+		                                        .setBackgroundColor(new Color(210, 255, 210));
+		ConditionalStyleBuilder condition2 = stl.conditionalStyle(new Condition2())
+		                                        .setBackgroundColor(new Color(255, 210, 210));
+		ConditionalStyleBuilder condition3 = stl.conditionalStyle(new Condition3())
+		                                        .setBackgroundColor(new Color(0, 190, 0))
+		                                        .bold();
+		ConditionalStyleBuilder condition4 = stl.conditionalStyle(new Condition4())
+		                                        .setBackgroundColor(new Color(190, 0, 0))
+		                                        .bold();
+		StyleBuilder priceStyle = stl.style()
+		                             .conditionalStyles(
+		                            	 condition3, condition4);
+
 		//                                                           title,     field name     data type
 		TextColumnBuilder<String>     itemColumn      = col.column("Item",       "item",      type.stringType()).setStyle(boldStyle);
 		TextColumnBuilder<Integer>    quantityColumn  = col.column("Quantity",   "quantity",  type.integerType());
 		TextColumnBuilder<BigDecimal> unitPriceColumn = col.column("Unit price", "unitprice", currencyType);
 		//price = unitPrice * quantity
-		TextColumnBuilder<BigDecimal> priceColumn     = unitPriceColumn.multiply(quantityColumn).setTitle("Price")
-		                                                               .setDataType(currencyType);
+		priceColumn                                   = unitPriceColumn.multiply(quantityColumn).setTitle("Price")
+		                                                               .setDataType(currencyType)
+		                                                               .setStyle(priceStyle);
 		PercentageColumnBuilder       pricePercColumn = col.percentageColumn("Price %", priceColumn);	
 		TextColumnBuilder<Integer>    rowNumberColumn = col.reportRowNumberColumn("No.")
 		                                                    //sets the fixed width of a column, width = 2 * character width
@@ -97,7 +115,9 @@ public class SimpleReport_Step10 {
 			  .subtotalsAtSummary(
 			  		sbt.sum(unitPriceColumn), sbt.sum(priceColumn))
 			  .subtotalsAtFirstGroupFooter(
-			  		sbt.sum(unitPriceColumn), sbt.sum(priceColumn))			  		
+			  		sbt.sum(unitPriceColumn), sbt.sum(priceColumn))			
+			  .detailRowHighlighters(
+			  		condition1, condition2)
 			  .title(//shows report title
 			  	cmp.horizontalList()
 			  		.add(
@@ -125,6 +145,38 @@ public class SimpleReport_Step10 {
 		}
 	}
 	
+	private class Condition1 extends AbstractSimpleExpression<Boolean> {
+		private static final long serialVersionUID = 1L;
+
+		public Boolean evaluate(ReportParameters reportParameters) {
+			return reportParameters.getValue(priceColumn).doubleValue() > 150;
+		}		
+	}
+
+	private class Condition2 extends AbstractSimpleExpression<Boolean> {
+		private static final long serialVersionUID = 1L;
+
+		public Boolean evaluate(ReportParameters reportParameters) {
+			return reportParameters.getValue(priceColumn).doubleValue() < 30;
+		}		
+	}
+	
+	private class Condition3 extends AbstractSimpleExpression<Boolean> {
+		private static final long serialVersionUID = 1L;
+
+		public Boolean evaluate(ReportParameters reportParameters) {
+			return reportParameters.getValue(priceColumn).doubleValue() > 200;
+		}		
+	}
+
+	private class Condition4 extends AbstractSimpleExpression<Boolean> {
+		private static final long serialVersionUID = 1L;
+
+		public Boolean evaluate(ReportParameters reportParameters) {
+			return reportParameters.getValue(priceColumn).doubleValue() < 20;
+		}		
+	}
+	
 	private JRDataSource createDataSource() {
 		DataSource dataSource = new DataSource("item", "quantity", "unitprice");
 		dataSource.add("Notebook", 1, new BigDecimal(500));
@@ -139,6 +191,6 @@ public class SimpleReport_Step10 {
 	}
 	
 	public static void main(String[] args) {
-		new SimpleReport_Step10();
+		new SimpleReport_Step12();
 	}
 }

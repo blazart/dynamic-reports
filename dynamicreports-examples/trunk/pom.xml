@@ -6,7 +6,7 @@
 
 	<groupId>net.sourceforge.dynamicreports</groupId>
 	<artifactId>dynamicreports-examples</artifactId>
-	<version>1.0.1</version>
+	<version>1.0.2</version>
 	<packaging>jar</packaging>
 
 	<name>DynamicReports - examples</name>
@@ -20,16 +20,16 @@
 		</license>
 	</licenses>
 	<scm>
-		<connection>scm:svn:http://dynamicreports.svn.sourceforge.net/svnroot/dynamicreports/dynamicreports-examples/trunk</connection>
-		<developerConnection>scm:svn:http://dynamicreports.svn.sourceforge.net/svnroot/dynamicreports/dynamicreports-examples/trunk</developerConnection>
-		<url>http://dynamicreports.svn.sourceforge.net</url>
+		<connection>scm:svn:https://dynamicreports.svn.sourceforge.net/svnroot/dynamicreports/dynamicreports-examples/trunk</connection>
+		<developerConnection>scm:svn:https://dynamicreports.svn.sourceforge.net/svnroot/dynamicreports/dynamicreports-examples/trunk</developerConnection>
+		<url>http://dynamicreports.svn.sourceforge.net/viewvc/dynamicreports/dynamicreports-examples</url>
 	</scm>
 	
 	<dependencies>
 		<dependency>
 			<groupId>net.sourceforge.dynamicreports</groupId>
 			<artifactId>dynamicreports</artifactId>
-			<version>1.0.1</version>
+			<version>1.0.2</version>
 		</dependency>     
 	</dependencies>
 
