@@ -47,7 +47,7 @@ public abstract class DimensionComponentBuilder<T extends DimensionComponentBuil
    */
 	public T setDimension(Integer width, Integer height) {
 		getObject().setWidth(width);
-		getObject().setHeight(width);
+		getObject().setHeight(height);
 		return (T) this;
 	}
 	
@@ -62,7 +62,7 @@ public abstract class DimensionComponentBuilder<T extends DimensionComponentBuil
    */
 	public T setFixedDimension(Integer width, Integer height) {
 		getObject().setWidth(width);
-		getObject().setHeight(width);
+		getObject().setHeight(height);
 		getObject().setWidthType(ComponentDimensionType.FIXED);
 		getObject().setHeightType(ComponentDimensionType.FIXED);
 		return (T) this;
@@ -79,7 +79,7 @@ public abstract class DimensionComponentBuilder<T extends DimensionComponentBuil
    */
 	public T setMinDimension(Integer width, Integer height) {
 		getObject().setWidth(width);
-		getObject().setHeight(width);
+		getObject().setHeight(height);
 		getObject().setWidthType(ComponentDimensionType.EXPAND);
 		getObject().setHeightType(ComponentDimensionType.EXPAND);
 		return (T) this;

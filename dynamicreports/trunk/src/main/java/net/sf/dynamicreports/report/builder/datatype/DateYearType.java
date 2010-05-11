@@ -19,41 +19,29 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
  * USA. 
  */
-package net.sf.dynamicreports.report.builder.component;
+package net.sf.dynamicreports.report.builder.datatype;
 
-import net.sf.dynamicreports.report.base.component.DRComponent;
-import net.sf.dynamicreports.report.builder.AbstractBuilder;
-import net.sf.dynamicreports.report.builder.style.StyleBuilder;
+import java.util.Date;
+
+import net.sf.dynamicreports.report.base.datatype.AbstractDataType;
 import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.defaults.Defaults;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings({"unchecked", "ucd"})
-public abstract class ComponentBuilder<T extends ComponentBuilder<T, U>, U extends DRComponent> extends AbstractBuilder<T, U> {
+@SuppressWarnings("ucd")
+public class DateYearType extends AbstractDataType<Date> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-		
-	protected ComponentBuilder(U object) {
-		super(object);
+	
+	@Override
+	public String getPattern() {
+		return Defaults.getDefaults().getDateYearType().getPattern();
 	}
 	
-	public T setStyle(StyleBuilder style) {
-		if (style != null) {
-			getObject().setStyle(style.getStyle());
-		}
-		else {
-			getObject().setStyle(null);
-		}
-		return (T) this;
-	}
-	
-	public T setPrintWhenExpression(DRISimpleExpression<Boolean> printWhenExpression) {
-		getObject().setPrintWhenExpression(printWhenExpression);
-		return (T) this;
-	}	
-	
-	public U getComponent() {
-		return build();
+	@Override
+	public HorizontalAlignment getHorizontalAlignment() {
+		return Defaults.getDefaults().getDateYearType().getHorizontalAlignment();
 	}
 }

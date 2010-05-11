@@ -41,7 +41,7 @@ import org.junit.Test;
 public class ConditionsTest {
 
 	@Test
-	public void testComponentFixedWidth() {
+	public void test() {
 		//equal
 		FieldBuilder<Integer> value = field("name", Integer.class);
 		conditionTrue("equal", cnd.equal(value, 5, 10, 20));

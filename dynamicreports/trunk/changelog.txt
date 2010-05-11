@@ -5,6 +5,8 @@ Changes in version 1.0.2
 ---------------------------------------------------
 - new exporters - toDocx, toHtml, toOds, toOdt, toRtf, toText, toXhtml, toXlsx, toXml, toXmlss
 - DynamicReports.cnd.* - conditions expression builder, see SimpleReport_Step12 for an example
+- new data types - dateYear, dateMonth, dateDay
+- Fixed bug 2997586 - the height in setDimension(Integer width, Integer height) of the DimensionComponentBuilder class is set with the width
 
 Changes in version 1.0.1 (2010-04-21)
 ---------------------------------------------------
