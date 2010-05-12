@@ -19,37 +19,26 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
  * USA. 
  */
-package net.sf.dynamicreports.examples;
+package net.sf.dynamicreports.examples.complex.invoice;
 
-import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
-import net.sf.dynamicreports.report.builder.DynamicReports;
+import net.sf.dynamicreports.examples.complex.AbstractReportMain;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public abstract class AbstractReportMain<T extends ReportDesign<U>, U extends ReportData> {
+public class InvoiceMain extends AbstractReportMain<InvoiceDesign, InvoiceData> {
 	
-	public AbstractReportMain() {
-		build();
+	@Override
+	protected InvoiceDesign getReportDesign() {
+		return new InvoiceDesign();
 	}
 	
-	protected void build() {
-		try {
-			JasperReportBuilder reportBuilder = DynamicReports.report();			
-			U data = getReportData();
-			if (data != null) {
-				reportBuilder.setDataSource(data.createDataSource());
-			}
-			getReportDesign().configureReport(reportBuilder, data);
-			reportBuilder.show();						
-		} catch (Exception e) {
-			e.printStackTrace();	
-		}
+	@Override
+	protected InvoiceData getReportData() {
+		return new InvoiceData();
 	}
 	
-	protected U getReportData() {
-		return null;
+	public static void main(String[] args) {
+		new InvoiceMain();
 	}
-	
-	protected abstract T getReportDesign();	
 }

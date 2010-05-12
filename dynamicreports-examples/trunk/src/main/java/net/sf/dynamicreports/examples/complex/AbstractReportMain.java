@@ -19,26 +19,37 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
  * USA. 
  */
-package net.sf.dynamicreports.examples.sales;
+package net.sf.dynamicreports.examples.complex;
 
-import net.sf.dynamicreports.examples.AbstractReportMain;
+import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
+import net.sf.dynamicreports.report.builder.DynamicReports;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class SalesMain extends AbstractReportMain<SalesDesign, SalesData> {
+public abstract class AbstractReportMain<T extends ReportDesign<U>, U extends ReportData> {
 	
-	@Override
-	protected SalesDesign getReportDesign() {
-		return new SalesDesign();
+	public AbstractReportMain() {
+		build();
 	}
 	
-	@Override
-	protected SalesData getReportData() {
-		return new SalesData();
+	protected void build() {
+		try {
+			JasperReportBuilder reportBuilder = DynamicReports.report();			
+			U data = getReportData();
+			if (data != null) {
+				reportBuilder.setDataSource(data.createDataSource());
+			}
+			getReportDesign().configureReport(reportBuilder, data);
+			reportBuilder.show();						
+		} catch (Exception e) {
+			e.printStackTrace();	
+		}
 	}
 	
-	public static void main(String[] args) {
-		new SalesMain();
+	protected U getReportData() {
+		return null;
 	}
+	
+	protected abstract T getReportDesign();	
 }

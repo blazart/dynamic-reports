@@ -50,6 +50,7 @@ public class Templates {
 	
 	public static final ReportTemplateBuilder reportTemplate;
 	public static final CurrencyType currencyType;
+	public static final ComponentBuilder<?, ?> footerComponent;
 	
 	static {
 		rootStyle           = stl.style().setPadding(2);
@@ -57,7 +58,7 @@ public class Templates {
 		boldCenteredStyle   = stl.style(boldStyle)
 		                         .setAlignment(HorizontalAlignment.CENTER, VerticalAlignment.MIDDLE);
 		bold12CenteredStyle = stl.style(boldCenteredStyle)
-		                       .setFontSize(12);
+		                         .setFontSize(12);
 		bold18CenteredStyle = stl.style(bold12CenteredStyle)
 		                         .setFontSize(18);
 		columnStyle         = stl.style(rootStyle).setVerticalAlignment(VerticalAlignment.MIDDLE);
@@ -76,6 +77,11 @@ public class Templates {
 		                   .setSubtotalStyle(subtotalStyle)
 		                   .highlightDetailEvenRows();
 		currencyType = new CurrencyType();
+		
+		footerComponent = cmp.pageXofY()
+		                     .setStyle(
+		                     	stl.style(boldCenteredStyle)
+		                     	   .setTopBorder(stl.pen1Point()));
 	}
 	
 	/**
@@ -114,7 +120,7 @@ public class Templates {
 		}
 		
 		public String format(Number value, ReportParameters reportParameters) {
-			return label + currencyType.toString(value, reportParameters.getLocale());
+			return label + currencyType.valueToString(value, reportParameters.getLocale());
 		}	
 	}
 }

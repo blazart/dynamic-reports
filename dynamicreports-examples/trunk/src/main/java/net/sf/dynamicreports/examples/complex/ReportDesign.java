@@ -19,26 +19,14 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
  * USA. 
  */
-package net.sf.dynamicreports.examples.invoice;
+package net.sf.dynamicreports.examples.complex;
 
-import net.sf.dynamicreports.examples.AbstractReportMain;
+import net.sf.dynamicreports.report.builder.ReportBuilder;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class InvoiceMain extends AbstractReportMain<InvoiceDesign, InvoiceData> {
+public interface ReportDesign<T extends ReportData> {
 	
-	@Override
-	protected InvoiceDesign getReportDesign() {
-		return new InvoiceDesign();
-	}
-	
-	@Override
-	protected InvoiceData getReportData() {
-		return new InvoiceData();
-	}
-	
-	public static void main(String[] args) {
-		new InvoiceMain();
-	}
+	public void configureReport(ReportBuilder<?> rb, T reportData);
 }

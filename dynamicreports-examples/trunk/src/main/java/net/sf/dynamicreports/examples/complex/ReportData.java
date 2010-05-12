@@ -19,7 +19,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
  * USA. 
  */
-package net.sf.dynamicreports.examples;
+package net.sf.dynamicreports.examples.complex;
 
 import net.sf.jasperreports.engine.JRDataSource;
 

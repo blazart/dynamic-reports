@@ -19,13 +19,13 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
  * USA. 
  */
-package net.sf.dynamicreports.examples.invoice;
+package net.sf.dynamicreports.examples.complex.invoice;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.sf.dynamicreports.examples.ReportData;
+import net.sf.dynamicreports.examples.complex.ReportData;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
