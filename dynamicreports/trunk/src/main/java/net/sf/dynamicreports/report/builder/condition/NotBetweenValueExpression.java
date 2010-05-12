@@ -27,6 +27,7 @@ import net.sf.dynamicreports.report.definition.DRIValue;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
+@SuppressWarnings("ucd")
 public class NotBetweenValueExpression<T extends Number> extends AbstractBetweenValueExpression<T> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 			

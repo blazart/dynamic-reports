@@ -31,6 +31,7 @@ import net.sf.dynamicreports.report.definition.ReportParameters;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
+@SuppressWarnings("ucd")
 public abstract class AbstractBetweenValueExpression<T extends Number> extends AbstractSimpleExpression<Boolean> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 		

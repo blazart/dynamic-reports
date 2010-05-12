@@ -1,7 +1,7 @@
 DynamicReports Change Log
 =========================
 
-Changes in version 1.1.0
+Changes in version 1.1.0 (2010-05-12)
 ---------------------------------------------------
 - new exporters - toDocx, toHtml, toOds, toOdt, toRtf, toText, toXhtml, toXlsx, toXml, toXmlss
 - DynamicReports.cnd.* - conditions expression builder, see SimpleReport_Step12 for an example
