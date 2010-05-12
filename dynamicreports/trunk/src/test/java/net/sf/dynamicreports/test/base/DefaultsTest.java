@@ -19,7 +19,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
  * USA. 
  */
-package net.sf.dynamicreports.test.design.report;
+package net.sf.dynamicreports.test.base;
 
 import java.io.InputStream;
 
@@ -91,11 +91,10 @@ public class DefaultsTest {
 		testDataType("Percentage", defaults.getPercentageType(), "#,###.00%", HorizontalAlignment.LEFT);
 		testDataType("Boolean", defaults.getBooleanType(), null, HorizontalAlignment.RIGHT);
 		testDataType("Character", defaults.getCharacterType(), null, HorizontalAlignment.RIGHT);
-		testDataType("String", defaults.getStringType(), null, HorizontalAlignment.RIGHT);
-		
+		testDataType("String", defaults.getStringType(), null, HorizontalAlignment.RIGHT);		
 	}
 	
-	private void testDataType(String name, DRDataType<?> dataType, String pattern, HorizontalAlignment horizontalAlignment) {
+	private void testDataType(String name, DRDataType<?, ?> dataType, String pattern, HorizontalAlignment horizontalAlignment) {
 		Assert.assertEquals(name + " pattern", pattern, dataType.getPattern());
 		Assert.assertEquals(name + " horizontal alignment", horizontalAlignment, dataType.getHorizontalAlignment());
 	}

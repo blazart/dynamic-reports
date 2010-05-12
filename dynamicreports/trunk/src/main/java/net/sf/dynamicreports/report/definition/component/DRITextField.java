@@ -39,7 +39,7 @@ public interface DRITextField<T> extends DRIHyperLinkComponent {
 
 	public DRIValueFormatter<?, ? super T> getValueFormatter();
 
-	public DRIDataType<T> getDataType();
+	public DRIDataType<? super T, T> getDataType();
 
 	public Integer getColumns();
 

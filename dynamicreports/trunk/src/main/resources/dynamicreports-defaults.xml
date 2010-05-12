@@ -22,7 +22,7 @@
 	<dateYearToSecondType pattern="MM/dd/yyyy h:mm:ss a" horizontalAlignment="RIGHT"/>
 	<dateYearToFractionType pattern="MM/dd/yyyy h:mm:ss,SSS a" horizontalAlignment="RIGHT"/>	
 	<dateYearType pattern="yyyy" horizontalAlignment="RIGHT"/>
-	<dateMonthType pattern="MMM" horizontalAlignment="RIGHT"/> 
+	<dateMonthType pattern="MMMM" horizontalAlignment="RIGHT"/> 
 	<dateDayType pattern="dd" horizontalAlignment="RIGHT"/>  	   
 	<timeHourToMinuteType pattern="h:mm a" horizontalAlignment="RIGHT"/>
 	<timeHourToSecondType pattern="h:mm:ss a" horizontalAlignment="RIGHT"/>

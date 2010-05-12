@@ -40,11 +40,11 @@ public class ColumnBuilders {
 		return Columns.column(title, fieldName, valueClass);
 	}
 
-	public <T> TextColumnBuilder<T> column(String fieldName, DRIDataType<T> dataType) {
+	public <T> TextColumnBuilder<T> column(String fieldName, DRIDataType<? super T, T> dataType) {
 		return Columns.column(fieldName, dataType);
 	}
 
-	public <T> TextColumnBuilder<T> column(String title, String fieldName, DRIDataType<T> dataType) {
+	public <T> TextColumnBuilder<T> column(String title, String fieldName, DRIDataType<? super T, T> dataType) {
 		return Columns.column(title, fieldName, dataType);
 	}
 	
@@ -90,13 +90,13 @@ public class ColumnBuilders {
 		return Columns.percentageColumn(title, field);
 	}	
 	
-	public PercentageColumnBuilder percentageColumn(DRISimpleExpression<? extends Number> expression) {
+	/*public PercentageColumnBuilder percentageColumn(DRISimpleExpression<? extends Number> expression) {
 		return Columns.percentageColumn(expression);
 	}
 	
 	public PercentageColumnBuilder percentageColumn(String title, DRISimpleExpression<? extends Number> expression) {
 		return Columns.percentageColumn(title, expression);
-	}		
+	}*/		
 	
 	//column row number
 	public TextColumnBuilder<Integer> columnRowNumberColumn() {

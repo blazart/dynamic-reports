@@ -21,9 +21,6 @@
  */
 package net.sf.dynamicreports.report.builder.datatype;
 
-import java.util.Date;
-
-import net.sf.dynamicreports.report.base.datatype.AbstractDataType;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.defaults.Defaults;
@@ -32,7 +29,7 @@ import net.sf.dynamicreports.report.defaults.Defaults;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 @SuppressWarnings("ucd")
-public class DateMonthType extends AbstractDataType<Date> {
+public class DateMonthType extends DateType {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 	
 	@Override

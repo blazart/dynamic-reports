@@ -34,7 +34,7 @@ import net.sf.dynamicreports.report.defaults.Defaults;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 @SuppressWarnings("ucd")
-public class DateType extends AbstractDataType<Date> {
+public class DateType extends AbstractDataType<Date, Date> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 	
 	@Override
@@ -48,7 +48,7 @@ public class DateType extends AbstractDataType<Date> {
 	}
 		
 	@Override
-	public String toString(Object value, Locale locale) {		
+	public String valueToString(Date value, Locale locale) {		
 		if (value != null) {
 			return new SimpleDateFormat(getPattern(), locale).format(value);
 		}

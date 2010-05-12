@@ -66,7 +66,7 @@ public class DefaultBinder {
 		return defaults;
 	}
 	
-	private static void bind(DRDataType<?> dataType, XmlDataType xmlDataType) {
+	private static void bind(DRDataType<?, ?> dataType, XmlDataType xmlDataType) {
 		if (xmlDataType == null) {
 			return;
 		}
