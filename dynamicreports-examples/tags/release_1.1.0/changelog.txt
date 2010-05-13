@@ -1,0 +1,16 @@
+DynamicReports-examples Change Log
+=========================
+
+Changes in version 1.1.0 (2010-05-12)
+---------------------------------------------------
+- new examples - examples/gettingstarted/SimpleReport_ClassicSyntax
+                 examples/column/*
+- updated SimpleReport_Step11, SimpleReport_Step12 due to the new feature (conditions expression builder)                
+
+Changes in version 1.0.1 (2010-04-21)
+---------------------------------------------------
+- new examples - examples/gettingstarted/*
+
+Changes in version 1.0.0 (2010-03-31)
+---------------------------------------------------
+Initial version
