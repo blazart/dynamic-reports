@@ -120,7 +120,9 @@ public class StyleTransform {
 	private DRDesignStyle style(DRIStyle style, boolean textStyle, DefaultStyleType defaultStyleType) throws DRException {
 		DRDesignStyle designStyle = new DRDesignStyle();
 		baseStyle(designStyle, style);
-		designStyle.setParentStyle(transformStyle(style.getParentStyle(), textStyle, defaultStyleType));
+		if (style.getParentStyle() != null) {
+			designStyle.setParentStyle(transformStyle(style.getParentStyle(), textStyle, defaultStyleType));
+		}
 		for (DRIConditionalStyle conditionalStyle : style.getConditionalStyles()) {
 			designStyle.addConditionalStyle(conditionalStyle(conditionalStyle));
 		}

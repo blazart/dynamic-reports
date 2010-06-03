@@ -85,4 +85,9 @@ public class CustomGroupBuilder extends GroupBuilder<CustomGroupBuilder> {
 		}
 		return this;
 	}
+	
+	public CustomGroupBuilder setTitleWidth(Integer titleWidth) {
+		getObject().setTitleWidth(titleWidth);
+		return this;
+	}
 }

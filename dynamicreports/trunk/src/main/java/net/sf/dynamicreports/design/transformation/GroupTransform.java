@@ -132,7 +132,7 @@ public class GroupTransform {
 		band = group.getFooterBand();
 		designGroup.addFooterBand(groupBand("groupFooter", band, templateTransform.getGroupFooterSplitType(band), groupPadding, designGroup));
 		if (templateTransform.isGroupShowColumnHeaderAndFooter(group)) {
-			designGroup.addHeaderBand(accessor.getBandTransform().getColumnHeaderBand());
+			designGroup.addHeaderBand(accessor.getBandTransform().getColumnHeaderForGroupBand());
 			designGroup.addFooterBand(accessor.getBandTransform().getColumnFooterBand());
 		}
 	}
@@ -157,6 +157,7 @@ public class GroupTransform {
 		DRTextField titleField = new DRTextField();
 		titleField.setValueExpression(group.getTitleExpression());
 		titleField.setStyle((DRStyle) group.getTitleStyle());
+		titleField.setWidth(group.getTitleWidth());
 		DRDesignTextField designTitleField = accessor.getComponentTransform().textField(titleField, DefaultStyleType.COLUMN_TITLE);
 		designTitleField.setName("group_" + group.getName() + ".title");
 		return designTitleField;	

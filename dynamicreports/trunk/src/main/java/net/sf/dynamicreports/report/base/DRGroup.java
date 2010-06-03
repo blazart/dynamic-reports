@@ -42,6 +42,7 @@ public class DRGroup implements DRIGroup {
 	private DRTextField<?> valueField;	
 	private DRIExpression<?> titleExpression;
 	private DRStyle titleStyle;
+	private Integer titleWidth;
 	private GroupHeaderLayout headerLayout;
 	private Boolean hideColumn;
 	private Boolean showColumnHeaderAndFooter;
@@ -92,6 +93,14 @@ public class DRGroup implements DRIGroup {
 
 	public void setTitleStyle(DRStyle titleStyle) {
 		this.titleStyle = titleStyle;
+	}
+	
+	public Integer getTitleWidth() {
+		return titleWidth;
+	}
+	
+	public void setTitleWidth(Integer titleWidth) {
+		this.titleWidth = titleWidth;
 	}
 	
 	public GroupHeaderLayout getHeaderLayout() {
