@@ -64,10 +64,7 @@ public class ExpressionTransform {
 		}	
 		for (DRIDesignComplexExpression complexExpression : accessor.getReport().getComplexExpressions()) {
 			addComplexExpression(complexExpression);
-		}	
-	}
-	
-	public void transformVariables() {	
+		}
 		for (DRIDesignVariable variable : accessor.getReport().getVariables()) {
 			addVariable(variable);
 		}	

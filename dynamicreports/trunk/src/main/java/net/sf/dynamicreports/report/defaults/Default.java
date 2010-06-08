@@ -65,6 +65,8 @@ public class Default {
 	private DRStyle textStyle;
 	private DRStyle columnTitleStyle;
 	private DRStyle columnStyle;
+	private DRStyle groupTitleStyle;
+	private DRStyle groupStyle;
 	private DRStyle subtotalStyle;
 	private DRStyle imageStyle;
 	private DRStyle chartStyle;
@@ -86,6 +88,7 @@ public class Default {
 	private boolean groupStartInNewPage;
 	private boolean groupStartInNewColumn;
 	private boolean groupReprintHeaderOnEachPage;
+	private boolean groupByDataType;
 	//text field
 	private int textFieldWidth;
 	private boolean textFieldPrintRepeatedValues;
@@ -173,6 +176,8 @@ public class Default {
 		
 		this.columnTitleStyle = null;
 		this.columnStyle = null;
+		this.groupTitleStyle = null;
+		this.groupStyle = null;
 		this.subtotalStyle = null;
 		this.imageStyle = new DRStyle();
 		imageStyle.setImageScale(ImageScale.FILL_PROPORTIONALLY);
@@ -195,6 +200,7 @@ public class Default {
 		this.groupStartInNewPage = false;
 		this.groupStartInNewColumn = false;
 		this.groupReprintHeaderOnEachPage = false;		
+		this.groupByDataType = false;
 		
 		this.textFieldWidth = 100;
 		this.textFieldPrintRepeatedValues = true;
@@ -316,6 +322,14 @@ public class Default {
 		return columnStyle;
 	}
 
+	public DRStyle getGroupTitleStyle() {
+		return groupTitleStyle;
+	}
+
+	public DRStyle getGroupStyle() {
+		return groupStyle;
+	}
+	
 	public DRStyle getSubtotalStyle() {
 		return subtotalStyle;
 	}
@@ -388,6 +402,10 @@ public class Default {
 		return groupReprintHeaderOnEachPage;
 	}
 
+	public boolean isGroupByDataType() {
+		return groupByDataType;
+	}
+	
 	public int getTextFieldWidth() {
 		return textFieldWidth;
 	}

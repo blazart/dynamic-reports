@@ -27,6 +27,7 @@ import junit.framework.Assert;
 import net.sf.dynamicreports.report.builder.column.ColumnBuilder;
 import net.sf.dynamicreports.report.builder.group.GroupBuilder;
 import net.sf.dynamicreports.report.builder.subtotal.SubtotalBuilder;
+import net.sf.jasperreports.engine.JRAlignment;
 import net.sf.jasperreports.engine.JRStyle;
 import net.sf.jasperreports.engine.base.JRBoxPen;
 
@@ -77,6 +78,14 @@ public abstract class AbstractJasperStyleTest extends AbstractJasperTest {
 		Assert.assertEquals(right, style.getLineBox().getRightPadding());
 	}
 	
+	protected void horizontalAlignmentTest(String name, int index, Byte horizontalAlignment) {
+		JRAlignment element = (JRAlignment) getElementAt(name, index);
+		if (horizontalAlignment == null) {
+			Assert.assertEquals("horizontalAlignment", JRAlignment.HORIZONTAL_ALIGN_LEFT, element.getHorizontalAlignment());			
+		}
+		Assert.assertEquals("horizontalAlignment", horizontalAlignment, new Byte(element.getHorizontalAlignment()));
+	}
+	
 	//column detail
 	protected void columnDetailStyleTest(ColumnBuilder<?, ?> column, int index, Color foreColor, Color backColor, String fontName, int fontSize, Boolean bold, Boolean italic) {
 		styleTest(JasperTestUtils.getColumnDetailName(column), index, foreColor, backColor, fontName, fontSize, bold, italic);
@@ -84,6 +93,10 @@ public abstract class AbstractJasperStyleTest extends AbstractJasperTest {
 	
 	protected void columnDetailPaddingTest(ColumnBuilder<?, ?> column, int index, Integer top, Integer bottom, Integer left, Integer right) {
 		paddingTest(JasperTestUtils.getColumnDetailName(column), index, top, bottom, left, right);
+	}
+
+	protected void columnDetailAlignmentTest(ColumnBuilder<?, ?> column, int index, Byte horizontalAlignment) {
+		horizontalAlignmentTest(JasperTestUtils.getColumnDetailName(column), index, horizontalAlignment);
 	}
 	
 	//column title
@@ -97,6 +110,10 @@ public abstract class AbstractJasperStyleTest extends AbstractJasperTest {
 	
 	protected void columnTitleStyleTest(ColumnBuilder<?, ?> column, int index, Color foreColor, Color backColor, String fontName, int fontSize, Boolean bold, Boolean italic) {
 		styleTest(JasperTestUtils.getColumnTitleName(column), index, foreColor, backColor, fontName, fontSize, bold, italic);
+	}
+	
+	protected void columnTitleAlignmentTest(ColumnBuilder<?, ?> column, int index, Byte horizontalAlignment) {
+		horizontalAlignmentTest(JasperTestUtils.getColumnTitleName(column), index, horizontalAlignment);
 	}
 	
 	//subtotal label
@@ -129,5 +146,9 @@ public abstract class AbstractJasperStyleTest extends AbstractJasperTest {
 	//group header
 	protected void groupHeaderStyleTest(GroupBuilder<?> group, int index, Color foreColor, Color backColor, String fontName, int fontSize, Boolean bold, Boolean italic) {
 		styleTest(JasperTestUtils.getHeaderGroupName(group), index, foreColor, backColor, fontName, fontSize, bold, italic);
+	}
+	
+	protected void groupHeaderAlignmentTest(GroupBuilder<?> group, int index, Byte horizontalAlignment) {
+		horizontalAlignmentTest(JasperTestUtils.getHeaderGroupName(group), index, horizontalAlignment);
 	}
 }

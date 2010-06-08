@@ -190,6 +190,10 @@ public class StyleTransform {
 			return transformStyle(templateTransform.getColumnStyle(), true);
 		case COLUMN_TITLE:				
 			return transformStyle(templateTransform.getColumnTitleStyle(), true);
+		case GROUP:	
+			return transformStyle(templateTransform.getGroupStyle(), true);
+		case GROUP_TITLE:				
+			return transformStyle(templateTransform.getGroupTitleStyle(), true);			
 		case SUBTOTAL:				
 			return transformStyle(templateTransform.getSubtotalStyle(), true);
 		case IMAGE:

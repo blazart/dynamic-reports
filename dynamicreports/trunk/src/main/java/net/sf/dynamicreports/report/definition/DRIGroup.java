@@ -48,6 +48,8 @@ public interface DRIGroup extends Serializable {
 	
 	public Boolean getHideColumn();
 	
+	public Boolean getGroupByDataType();
+	
 	public Boolean getShowColumnHeaderAndFooter();
 
 	public DRISimpleExpression<Boolean> getPrintSubtotalsWhenExpression();

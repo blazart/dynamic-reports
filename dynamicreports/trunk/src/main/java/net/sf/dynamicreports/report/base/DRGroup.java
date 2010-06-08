@@ -45,6 +45,7 @@ public class DRGroup implements DRIGroup {
 	private Integer titleWidth;
 	private GroupHeaderLayout headerLayout;
 	private Boolean hideColumn;
+	private Boolean groupByDataType;
 	private Boolean showColumnHeaderAndFooter;
 	private DRISimpleExpression<Boolean> printSubtotalsWhenExpression;
 	private Integer padding;
@@ -117,6 +118,14 @@ public class DRGroup implements DRIGroup {
 
 	public void setHideColumn(Boolean hideColumn) {
 		this.hideColumn = hideColumn;
+	}
+	
+	public Boolean getGroupByDataType() {
+		return groupByDataType;
+	}
+	
+	public void setGroupByDataType(Boolean groupByDataType) {
+		this.groupByDataType = groupByDataType;
 	}
 	
 	public Boolean getShowColumnHeaderAndFooter() {

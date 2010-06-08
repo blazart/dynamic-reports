@@ -29,6 +29,8 @@ public enum DefaultStyleType {
 	TEXT,
 	COLUMN,
 	COLUMN_TITLE,
+	GROUP,
+	GROUP_TITLE,
 	SUBTOTAL,
 	IMAGE,
 	CHART
