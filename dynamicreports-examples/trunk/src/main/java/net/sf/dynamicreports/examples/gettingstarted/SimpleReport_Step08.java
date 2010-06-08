@@ -33,16 +33,15 @@ import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.builder.group.ColumnGroupBuilder;
 import net.sf.dynamicreports.report.builder.style.StyleBuilder;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
-import net.sf.dynamicreports.report.constant.VerticalAlignment;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class SimpleReport_Step9 {
+public class SimpleReport_Step08 {
 	
-	public SimpleReport_Step9() {
+	public SimpleReport_Step08() {
 		build();
 	}
 	
@@ -51,10 +50,7 @@ public class SimpleReport_Step9 {
 		StyleBuilder boldCenteredStyle = stl.style(boldStyle).setHorizontalAlignment(HorizontalAlignment.CENTER);
 		StyleBuilder columnTitleStyle  = stl.style(boldCenteredStyle)
 		                                    .setBorder(stl.pen1Point())		                                    
-		                                    .setBackgroundColor(Color.LIGHT_GRAY);
-		StyleBuilder titleStyle        = stl.style(boldCenteredStyle)
-		                                    .setVerticalAlignment(VerticalAlignment.MIDDLE)
-		                                    .setFontSize(15);
+		                                    .setBackgroundColor(Color.LIGHT_GRAY);	
 		
 		//                                                           title,     field name     data type
 		TextColumnBuilder<String>     itemColumn      = col.column("Item",       "item",      type.stringType()).setStyle(boldStyle);
@@ -93,15 +89,8 @@ public class SimpleReport_Step9 {
 			  .subtotalsAtSummary(
 			  		sbt.sum(unitPriceColumn), sbt.sum(priceColumn))
 			  .subtotalsAtFirstGroupFooter(
-			  		sbt.sum(unitPriceColumn), sbt.sum(priceColumn))			  		
-			  .title(//shows report title
-			  	cmp.horizontalList()
-			  		.add(
-			  			cmp.image(getClass().getResourceAsStream("../images/dynamicreports.png")).setFixedDimension(80, 80),
-			  			cmp.text("DynamicReports").setStyle(titleStyle).setHorizontalAlignment(HorizontalAlignment.LEFT),
-			  			cmp.text("Getting started").setStyle(titleStyle).setHorizontalAlignment(HorizontalAlignment.RIGHT))
-			  		.newRow()
-			  		.add(cmp.filler().setStyle(stl.style().setTopBorder(stl.pen2Point())).setFixedHeight(10)))			
+			  		sbt.sum(unitPriceColumn), sbt.sum(priceColumn))			  
+			  .title(cmp.text("Getting started").setStyle(boldCenteredStyle))//shows report title
 			  .pageFooter(cmp.pageXofY().setStyle(boldCenteredStyle))//shows number of page at page footer
 			  .summary(
 			  		cmp.horizontalList(itemChart, itemChart2))
@@ -126,6 +115,6 @@ public class SimpleReport_Step9 {
 	}
 	
 	public static void main(String[] args) {
-		new SimpleReport_Step9();
+		new SimpleReport_Step08();
 	}
 }

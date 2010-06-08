@@ -37,9 +37,9 @@ import net.sf.jasperreports.engine.JRDataSource;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class SimpleReport_Step5 {
+public class SimpleReport_Step04 {
 	
-	public SimpleReport_Step5() {
+	public SimpleReport_Step04() {
 		build();
 	}
 	
@@ -60,26 +60,21 @@ public class SimpleReport_Step5 {
 		TextColumnBuilder<Integer>    rowNumberColumn = col.reportRowNumberColumn("No.")
 		                                                    //sets the fixed width of a column, width = 2 * character width
 		                                                   .setFixedColumns(2)
-		                                                   .setHorizontalAlignment(HorizontalAlignment.CENTER);		
+		                                                   .setHorizontalAlignment(HorizontalAlignment.CENTER);
 		try {			
 			report()//create new report design
 			  .setColumnTitleStyle(columnTitleStyle)
-			  .setSubtotalStyle(boldStyle)
 			  .highlightDetailEvenRows()
 			  .columns(//add columns			  		
 			  		rowNumberColumn, itemColumn, quantityColumn, unitPriceColumn, priceColumn, pricePercColumn)
 			  .groupBy(itemColumn)
-			  .subtotalsAtSummary(
-			  		sbt.sum(unitPriceColumn), sbt.sum(priceColumn))
-			  .subtotalsAtFirstGroupFooter(
-			  		sbt.sum(unitPriceColumn), sbt.sum(priceColumn))			  
 			  .title(cmp.text("Getting started").setStyle(boldCenteredStyle))//shows report title
 			  .pageFooter(cmp.pageXofY().setStyle(boldCenteredStyle))//shows number of page at page footer
 			  .setDataSource(createDataSource())//set datasource
 			  .show();//create and show report						
 		} catch (DRException e) {
 			e.printStackTrace();	
-		}		
+		}
 	}
 	
 	private JRDataSource createDataSource() {
@@ -96,6 +91,6 @@ public class SimpleReport_Step5 {
 	}
 	
 	public static void main(String[] args) {
-		new SimpleReport_Step5();
+		new SimpleReport_Step04();
 	}
 }

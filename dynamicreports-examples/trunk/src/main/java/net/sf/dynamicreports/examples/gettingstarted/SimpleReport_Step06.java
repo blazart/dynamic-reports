@@ -38,9 +38,9 @@ import net.sf.jasperreports.engine.JRDataSource;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class SimpleReport_Step7 {
+public class SimpleReport_Step06 {
 	
-	public SimpleReport_Step7() {
+	public SimpleReport_Step06() {
 		build();
 	}
 	
@@ -80,8 +80,6 @@ public class SimpleReport_Step7 {
 			  .highlightDetailEvenRows()
 			  .columns(//add columns			  		
 			  		rowNumberColumn, itemColumn, quantityColumn, unitPriceColumn, priceColumn, pricePercColumn)
-			  .columnGrid(
-			  		rowNumberColumn, quantityColumn, unitPriceColumn, grid.verticalColumnGridList(priceColumn, pricePercColumn))
 			  .groupBy(itemColumn)
 			  .subtotalsAtSummary(
 			  		sbt.sum(unitPriceColumn), sbt.sum(priceColumn))
@@ -89,8 +87,7 @@ public class SimpleReport_Step7 {
 			  		sbt.sum(unitPriceColumn), sbt.sum(priceColumn))			  
 			  .title(cmp.text("Getting started").setStyle(boldCenteredStyle))//shows report title
 			  .pageFooter(cmp.pageXofY().setStyle(boldCenteredStyle))//shows number of page at page footer
-			  .summary(
-			  		cmp.horizontalList(itemChart, itemChart2))
+			  .summary(itemChart, itemChart2)
 			  .setDataSource(createDataSource())//set datasource
 			  .show();//create and show report						
 		} catch (DRException e) {
@@ -112,6 +109,6 @@ public class SimpleReport_Step7 {
 	}
 	
 	public static void main(String[] args) {
-		new SimpleReport_Step7();
+		new SimpleReport_Step06();
 	}
 }
