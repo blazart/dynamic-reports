@@ -6,7 +6,7 @@
 
 	<groupId>net.sourceforge.dynamicreports</groupId>
 	<artifactId>dynamicreports-examples</artifactId>
-	<version>1.1.1</version>
+	<version>1.2.0</version>
 	<packaging>jar</packaging>
 
 	<name>DynamicReports - examples</name>
@@ -29,8 +29,16 @@
 		<dependency>
 			<groupId>net.sourceforge.dynamicreports</groupId>
 			<artifactId>dynamicreports</artifactId>
-			<version>1.1.1</version>
-		</dependency>     
+			<version>1.2.0</version>
+		</dependency>  
+		<dependency>
+			<!-- only for JDK 1.5, not required for JDK 1.6 -->
+			<groupId>com.sun.xml.bind</groupId>
+			<artifactId>jaxb-impl</artifactId>
+			<version>2.2</version>
+			<scope>runtime</scope>
+			<optional>true</optional>
+		</dependency>   
 		<dependency>
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi</artifactId>
