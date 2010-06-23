@@ -1,6 +1,10 @@
 DynamicReports Change Log
 =========================
 
+Changes in version 1.2.0 ()
+---------------------------------------------------
+- minor improvements in subtotals
+
 Changes in version 1.1.1 (2010-06-09)
 ---------------------------------------------------
 - groups can be grouped by data type, see DateGroupReport for an example
