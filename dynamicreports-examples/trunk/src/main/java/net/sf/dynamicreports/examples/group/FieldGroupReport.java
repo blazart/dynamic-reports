@@ -38,9 +38,9 @@ import net.sf.jasperreports.engine.JRDataSource;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class GroupReport1 {
+public class FieldGroupReport {
 	
-	public GroupReport1() {
+	public FieldGroupReport() {
 		build();
 	}
 	
@@ -92,6 +92,6 @@ public class GroupReport1 {
 	}
 	
 	public static void main(String[] args) {
-		new GroupReport1();
+		new FieldGroupReport();
 	}
 }

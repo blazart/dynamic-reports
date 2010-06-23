@@ -1,6 +1,12 @@
 DynamicReports-examples Change Log
 ==================================
 
+Changes in version 1.2.0 ()
+---------------------------------------------------
+- new examples - examples/subtotals/*
+                 examples/miscellaneous/*
+                 examples/column/CalculatedColumnReport
+
 Changes in version 1.1.1 (2010-06-09)
 ---------------------------------------------------
 - new examples - examples/group/*

@@ -37,7 +37,6 @@ import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.builder.group.ColumnGroupBuilder;
 import net.sf.dynamicreports.report.builder.style.FontBuilder;
 import net.sf.dynamicreports.report.builder.subtotal.AggregationSubtotalBuilder;
-import net.sf.dynamicreports.report.constant.Calculation;
 import net.sf.dynamicreports.report.constant.Orientation;
 
 /**
@@ -61,8 +60,8 @@ public class SalesDesign implements ReportDesign<SalesData> {
 		//init groups
 		ColumnGroupBuilder stateGroup = grp.group(stateColumn);
 		//init subtotals
-		AggregationSubtotalBuilder<Double>     priceAvg     = sbt.aggregate(priceColumn, Calculation.AVERAGE);
-		priceAvg.setValueFormatter(Templates.createCurrencyValueFormatter("avg = "));
+		AggregationSubtotalBuilder<Number> priceAvg         = sbt.avg(priceColumn)
+		                                                         .setValueFormatter(Templates.createCurrencyValueFormatter("avg = "));
 		AggregationSubtotalBuilder<BigDecimal> unitPriceSum = sbt.sum(unitPriceColumn).setLabel("Total:").setLabelStyle(Templates.boldStyle);
 		AggregationSubtotalBuilder<BigDecimal> priceSum     = sbt.sum(priceColumn).setLabel("").setLabelStyle(Templates.boldStyle);
 		//init charts
