@@ -23,8 +23,6 @@ package net.sf.dynamicreports.examples.group;
 
 import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.math.BigDecimal;
 
 import net.sf.dynamicreports.examples.DataSource;
@@ -59,11 +57,8 @@ public class CustomGroupReport {
 			  .title(Templates.createTitleComponent("CustomGroup"))
 			  .pageFooter(Templates.footerComponent)
 			  .setDataSource(createDataSource())
-			  .toJrXml(new FileOutputStream("c:/report.jrxml"))
 			  .show();	
 		} catch (DRException e) {
-			e.printStackTrace();
-		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 	}

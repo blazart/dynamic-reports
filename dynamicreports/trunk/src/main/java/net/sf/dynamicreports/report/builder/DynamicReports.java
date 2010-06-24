@@ -21,6 +21,7 @@
  */
 package net.sf.dynamicreports.report.builder;
 
+import net.sf.dynamicreports.jasper.builder.JasperConcatenatedReportBuilder;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.chart.ChartBuilders;
 import net.sf.dynamicreports.report.builder.column.ColumnBuilder;
@@ -59,6 +60,10 @@ public class DynamicReports {
 	public static JasperReportBuilder report() {
 		return new JasperReportBuilder();
 	}	
+
+	public static JasperConcatenatedReportBuilder concatenatedReport() {
+		return new JasperConcatenatedReportBuilder();
+	}
 	
 	//field
 	public static <T> FieldBuilder<T> field(String name, Class<T> valueClass) {

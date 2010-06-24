@@ -3,6 +3,7 @@ DynamicReports Change Log
 
 Changes in version 1.2.0 ()
 ---------------------------------------------------
+- concatenated reports, reports can be concatenated into one document, see ConcatenatedReport for an example
 - minor improvements in subtotals
 
 Changes in version 1.1.1 (2010-06-09)
