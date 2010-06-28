@@ -55,6 +55,7 @@ public class ExportTest {
 	@Test
 	public void exportTest() {
 		try {
+			report.toJrXml(new ByteArrayOutputStream());
 			report.toPng(new ByteArrayOutputStream(), -1);
 			report.toCsv(new ByteArrayOutputStream());
 			report.toDocx(new ByteArrayOutputStream());

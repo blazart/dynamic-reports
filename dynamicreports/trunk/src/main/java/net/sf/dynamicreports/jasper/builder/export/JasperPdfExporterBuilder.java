@@ -1,0 +1,137 @@
+/* Dynamic reports - Free Java reporting library for creating reports dynamically
+ *
+ * (C) Copyright 2010 Ricardo Mariaca
+ *
+ * http://dynamicreports.sourceforge.net
+ *
+ * This library is free software; you can redistribute it and/or modify it 
+ * under the terms of the GNU Lesser General Public License as published by 
+ * the Free Software Foundation; either version 3 of the License, or 
+ * (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but 
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
+ * USA. 
+ */
+package net.sf.dynamicreports.jasper.builder.export;
+
+import java.util.List;
+
+import net.sf.dynamicreports.jasper.base.export.JasperPdfExporter;
+import net.sf.dynamicreports.jasper.constant.PdfPermission;
+import net.sf.dynamicreports.jasper.constant.PdfVersion;
+import net.sf.dynamicreports.report.constant.Constants;
+
+/**
+ * @author Ricardo Mariaca (dynamicreports@gmail.com)
+ */
+@SuppressWarnings("ucd")
+public class JasperPdfExporterBuilder extends AbstractJasperExporterBuilder<JasperPdfExporterBuilder, JasperPdfExporter> {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
+	
+	protected JasperPdfExporterBuilder() {
+		super(new JasperPdfExporter());
+	}
+	
+	public JasperPdfExporterBuilder setCreatingBatchModeBookmarks(Boolean creatingBatchModeBookmarks) {
+		this.getObject().setCreatingBatchModeBookmarks(creatingBatchModeBookmarks);
+		return this;
+	}
+	
+	public JasperPdfExporterBuilder setCompressed(Boolean compressed) {
+		this.getObject().setCompressed(compressed);
+		return this;
+	}
+
+	public JasperPdfExporterBuilder encrypted(String userPassword) {
+		this.getObject().setEncrypted(true);
+		this.getObject().setUserPassword(userPassword);
+		return this;
+	}
+	
+	public JasperPdfExporterBuilder setEncrypted(Boolean encrypted) {
+		this.getObject().setEncrypted(encrypted);
+		return this;
+	}
+	
+	public JasperPdfExporterBuilder setBitKey128(Boolean bitKey128) {
+		this.getObject().setBitKey128(bitKey128);
+		return this;
+	}
+	
+	public JasperPdfExporterBuilder setUserPassword(String userPassword) {
+		this.getObject().setUserPassword(userPassword);
+		return this;
+	}
+	
+	public JasperPdfExporterBuilder setOwnerPassword(String ownerPassword) {
+		this.getObject().setOwnerPassword(ownerPassword);
+		return this;
+	}
+	
+	public JasperPdfExporterBuilder setPermissions(List<PdfPermission> permissions) {
+		this.getObject().setPermissions(permissions);
+		return this;
+	}
+	
+	public JasperPdfExporterBuilder setPdfVersion(PdfVersion pdfVersion) {
+		this.getObject().setPdfVersion(pdfVersion);
+		return this;
+	}
+	
+	public JasperPdfExporterBuilder setMetadataTitle(String metadataTitle) {
+		this.getObject().setMetadataTitle(metadataTitle);
+		return this;
+	}
+	
+	public JasperPdfExporterBuilder setMetadataAuthor(String metadataAuthor) {
+		this.getObject().setMetadataAuthor(metadataAuthor);
+		return this;
+	}
+	
+	public JasperPdfExporterBuilder setMetadataSubject(String metadataSubject) {
+		this.getObject().setMetadataSubject(metadataSubject);
+		return this;
+	}
+	
+	public JasperPdfExporterBuilder setMetadataKeyWords(String metadataKeyWords) {
+		this.getObject().setMetadataKeyWords(metadataKeyWords);
+		return this;
+	}
+	
+	public JasperPdfExporterBuilder setMetadataCreator(String metadataCreator) {
+		this.getObject().setMetadataCreator(metadataCreator);
+		return this;
+	}
+	
+	public JasperPdfExporterBuilder setForcelineBreakPolicy(Boolean forcelineBreakPolicy) {
+		this.getObject().setForcelineBreakPolicy(forcelineBreakPolicy);
+		return this;
+	}
+	
+	public JasperPdfExporterBuilder setForceSvgShapes(Boolean forceSvgShapes) {
+		this.getObject().setForceSvgShapes(forceSvgShapes);
+		return this;
+	}
+	
+	public JasperPdfExporterBuilder setPdfJavaScript(String pdfJavaScript) {
+		this.getObject().setPdfJavaScript(pdfJavaScript);
+		return this;
+	}
+	
+	public JasperPdfExporterBuilder setTagged(Boolean tagged) {
+		this.getObject().setTagged(tagged);
+		return this;
+	}
+	
+	public JasperPdfExporterBuilder setTagLanguage(String tagLanguage) {
+		this.getObject().setTagLanguage(tagLanguage);
+		return this;
+	}	
+}
