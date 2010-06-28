@@ -27,7 +27,6 @@ import java.math.BigDecimal;
 
 import net.sf.dynamicreports.examples.DataSource;
 import net.sf.dynamicreports.examples.Templates;
-import net.sf.dynamicreports.jasper.builder.export.Exporters;
 import net.sf.dynamicreports.jasper.builder.export.JasperPdfExporterBuilder;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
@@ -43,8 +42,8 @@ public class EncryptedPdfReport {
 	
 	private void build() {
 		try {
-			JasperPdfExporterBuilder pdfExporter = Exporters.pdfExporter("c:/report.pdf")
-			                                                .encrypted("1234");
+			JasperPdfExporterBuilder pdfExporter = export.pdfExporter("c:/report.pdf")
+			                                             .encrypted("1234");
 			
 			report()
 			  .setTemplate(Templates.reportTemplate)

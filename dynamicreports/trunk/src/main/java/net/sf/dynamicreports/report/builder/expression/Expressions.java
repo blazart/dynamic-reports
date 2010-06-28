@@ -32,6 +32,7 @@ import org.apache.commons.lang.Validate;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
+@SuppressWarnings("ucd")
 public class Expressions {
 	private static final PrintInFirstPageExpression printInFirstPage = new PrintInFirstPageExpression();
 	private static final PrintNotInFirstPageExpression printNotInFirstPage = new PrintNotInFirstPageExpression();

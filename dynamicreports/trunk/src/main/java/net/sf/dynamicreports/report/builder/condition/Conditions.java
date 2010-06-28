@@ -26,6 +26,7 @@ import net.sf.dynamicreports.report.definition.DRIValue;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
+@SuppressWarnings("ucd")
 public class Conditions {
 	
 	public static <T extends Number> EqualValueExpression<T> equal(DRIValue<T> value, Number ...number) {		

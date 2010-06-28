@@ -29,6 +29,7 @@ import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
+@SuppressWarnings("ucd")
 public class Charts {
 
 	public static AxisFormatBuilder axisFormat() {

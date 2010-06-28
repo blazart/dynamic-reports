@@ -28,6 +28,7 @@ import java.io.Writer;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
+@SuppressWarnings("ucd")
 public class Exporters {
 	
 	//csv

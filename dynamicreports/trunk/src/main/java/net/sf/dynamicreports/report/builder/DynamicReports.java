@@ -23,6 +23,7 @@ package net.sf.dynamicreports.report.builder;
 
 import net.sf.dynamicreports.jasper.builder.JasperConcatenatedReportBuilder;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
+import net.sf.dynamicreports.jasper.builder.export.ExporterBuilders;
 import net.sf.dynamicreports.report.builder.chart.ChartBuilders;
 import net.sf.dynamicreports.report.builder.column.ColumnBuilder;
 import net.sf.dynamicreports.report.builder.column.ColumnBuilders;
@@ -55,6 +56,7 @@ public class DynamicReports {
 	public static final ConditionBuilders cnd = new ConditionBuilders();
 	public static final DataTypeBuilders type = new DataTypeBuilders();
 	public static final ChartBuilders cht = new ChartBuilders();
+	public static final ExporterBuilders export = new ExporterBuilders();
 	
 	//report
 	public static JasperReportBuilder report() {

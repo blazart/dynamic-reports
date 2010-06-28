@@ -33,6 +33,7 @@ import org.apache.commons.lang.Validate;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
+@SuppressWarnings("ucd")
 public class Subtotals {
 
 	//calculation

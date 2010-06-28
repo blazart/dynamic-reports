@@ -32,9 +32,10 @@ import org.apache.commons.lang.Validate;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
+@SuppressWarnings("ucd")
 public class Columns {
 	
-	//text
+	//text	
 	public static <T> TextColumnBuilder<T> column(String fieldName, Class<T> valueClass) {
 		return column(DynamicReports.field(fieldName, valueClass));
 	}
