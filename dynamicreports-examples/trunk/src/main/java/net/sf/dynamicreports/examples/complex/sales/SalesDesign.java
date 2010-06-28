@@ -56,7 +56,7 @@ public class SalesDesign implements ReportDesign<SalesData> {
 		//price = unitPrice * quantity
 		TextColumnBuilder<BigDecimal> priceColumn     = unitPriceColumn.multiply(quantityColumn).setTitle("Price")
 		                                                               .setDataType(Templates.currencyType);
-		PercentageColumnBuilder       pricePercColumn = col.percentageColumn("Price %", priceColumn);		
+		PercentageColumnBuilder       pricePercColumn = col.percentageColumn("Price %", priceColumn);
 		//init groups
 		ColumnGroupBuilder stateGroup = grp.group(stateColumn);
 		//init subtotals

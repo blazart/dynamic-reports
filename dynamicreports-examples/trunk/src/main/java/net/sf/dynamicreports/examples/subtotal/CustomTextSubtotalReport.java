@@ -67,35 +67,35 @@ public class CustomTextSubtotalReport {
 		
 		StyleBuilder subtotalStyle = stl.style()
 		                                .bold()
-                                    .setTopBorder(stl.pen1Point())
-                                    .setHorizontalAlignment(HorizontalAlignment.CENTER);
+		                                .setTopBorder(stl.pen1Point())
+		                                .setHorizontalAlignment(HorizontalAlignment.CENTER);
 		
 		TextFieldBuilder<String> summarySbt = cmp.text(new CustomTextSubtotal(quantitySum, priceSum))
 		                                         .setStyle(subtotalStyle);
 		
 		TextFieldBuilder<String> groupSbt = cmp.text(new CustomTextSubtotal(quantityGrpSum, priceGrpSum))
-                                           .setStyle(subtotalStyle);
+		                                       .setStyle(subtotalStyle);
 		
 		countryGroup.footer(groupSbt);
 		
-		try {			
+		try {
 			report()
-		  .setTemplate(Templates.reportTemplate)
-		  .variables(
-		  		quantitySum, priceSum, quantityGrpSum, priceGrpSum)
-		  .columns(
-		  		countryColumn, itemColumn, quantityColumn, priceColumn)
-		  .groupBy(
-		  		countryGroup)
-		  .summary(
-		  		summarySbt)
-		  .title(Templates.createTitleComponent("CustomTextSubtotal"))
-		  .pageFooter(Templates.footerComponent)
-		  .setDataSource(createDataSource())
-		  .show();						
+			  .setTemplate(Templates.reportTemplate)
+			  .variables(
+			  	quantitySum, priceSum, quantityGrpSum, priceGrpSum)
+			  .columns(
+			  	countryColumn, itemColumn, quantityColumn, priceColumn)
+			  .groupBy(
+			  	countryGroup)
+			  .summary(
+			  	summarySbt)
+			  .title(Templates.createTitleComponent("CustomTextSubtotal"))
+			  .pageFooter(Templates.footerComponent)
+			  .setDataSource(createDataSource())
+			  .show();	
 		} catch (DRException e) {
-			e.printStackTrace();	
-		}		
+			e.printStackTrace();
+		}
 	}
 	
 	private class CustomTextSubtotal extends AbstractSimpleExpression<String> {

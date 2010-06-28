@@ -76,21 +76,21 @@ public class AggregationSubtotalReport {
 		
 		try {			
 			report()
-		  .setTemplate(Templates.reportTemplate)
-		  .columns(
-		  		itemColumn,	orderDateColumn, quantityColumn, unitPriceColumn)
-		  .subtotalsAtSummary(
-		  		itemSum, itemCount, itemDistCount,
-		  		orderDateCount, orderDateDistCount, orderDateMin, orderDateMax,
-		  		quantitySum, quantityAvg, quantityCount, quantityDistCount, quantityMin, quantityMax,
-		  		unitPriceSum, unitPriceAvg, unitPriceCount, unitPriceDistCount, unitPriceFirst, unitPriceStdDev, unitPriceVar)
-		  .title(Templates.createTitleComponent("AggregationSubtotal"))
-		  .pageFooter(Templates.footerComponent)
-		  .setDataSource(createDataSource())
-		  .show();						
+			  .setTemplate(Templates.reportTemplate)
+			  .columns(
+			  	itemColumn,	orderDateColumn, quantityColumn, unitPriceColumn)
+			  .subtotalsAtSummary(
+			  	itemSum, itemCount, itemDistCount,
+			  	orderDateCount, orderDateDistCount, orderDateMin, orderDateMax,
+			  	quantitySum, quantityAvg, quantityCount, quantityDistCount, quantityMin, quantityMax,
+			  	unitPriceSum, unitPriceAvg, unitPriceCount, unitPriceDistCount, unitPriceFirst, unitPriceStdDev, unitPriceVar)
+			  .title(Templates.createTitleComponent("AggregationSubtotal"))
+			  .pageFooter(Templates.footerComponent)
+			  .setDataSource(createDataSource())
+			  .show();
 		} catch (DRException e) {
-			e.printStackTrace();	
-		}		
+			e.printStackTrace();
+		}
 	}
 	
 	private JRDataSource createDataSource() {

@@ -48,7 +48,7 @@ public class ColumnGroupReport {
 		TextColumnBuilder<String> itemColumn = col.column("Item", "item", type.stringType());
 		
 		ColumnGroupBuilder itemGroup = grp.group(itemColumn)
-				                              .setTitleWidth(30)		                                  
+		                                  .setTitleWidth(30)
 		                                  .setHeaderLayout(GroupHeaderLayout.TITLE_AND_VALUE)
 		                                  .showColumnHeaderAndFooter();
 		
@@ -57,10 +57,10 @@ public class ColumnGroupReport {
 			  .setTemplate(Templates.reportTemplate)
 			  .setShowColumnTitle(false)
 			  .columns(
-			  		itemColumn,
-			  		col.column("Order date", "orderdate", type.dateType()),
-			  		col.column("Quantity",   "quantity",  type.integerType()),
-			  		col.column("Unit price", "unitprice", type.bigDecimalType()))
+			  	itemColumn,
+			  	col.column("Order date", "orderdate", type.dateType()),
+			  	col.column("Quantity",   "quantity",  type.integerType()),
+			  	col.column("Unit price", "unitprice", type.bigDecimalType()))
 			  .groupBy(itemGroup)
 			  .title(Templates.createTitleComponent("Group"))
 			  .pageFooter(Templates.footerComponent)

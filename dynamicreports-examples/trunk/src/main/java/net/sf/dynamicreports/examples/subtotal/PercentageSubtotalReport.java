@@ -59,7 +59,7 @@ public class PercentageSubtotalReport {
 		StyleBuilder itemInCountryLabelStyle = stl.style().setForegroudColor(Color.GREEN);
 		StyleBuilder itemInCountryStyle      = stl.style(itemInCountryLabelStyle)
 		                                          .setTopBorder(stl.pen1Point());
-		StyleBuilder itemLabelStyle          = stl.style().setForegroudColor(Color.BLUE);		
+		StyleBuilder itemLabelStyle          = stl.style().setForegroudColor(Color.BLUE);
 		StyleBuilder itemStyle               = stl.style(itemLabelStyle)
 		                                          .setTopBorder(stl.pen1Point());
 		
@@ -76,24 +76,24 @@ public class PercentageSubtotalReport {
 		                                                       .setStyle(itemStyle)
 		                                                       .setTotalType(PercentageTotalType.REPORT);
 		
-		try {			
+		try {
 			report()
-		  .setTemplate(Templates.reportTemplate)
-		  .columns(
-		  		countryColumn, itemColumn,	priceColumn)
-		  .groupBy(
-		  		countryGroup, itemGroup)
-		  .subtotalsOfPercentageAtGroupFooter(
-		  		countryGroup, countryPercentage)
-		  .subtotalsOfPercentageAtGroupFooter(
-		  		itemGroup, itemInCountryPercentage, itemPercentage)
-		  .title(Templates.createTitleComponent("PercentageSubtotal"))
-		  .pageFooter(Templates.footerComponent)
-		  .setDataSource(createDataSource())
-		  .show();						
+			  .setTemplate(Templates.reportTemplate)
+			  .columns(
+			  	countryColumn, itemColumn,	priceColumn)
+			  .groupBy(
+			  	countryGroup, itemGroup)
+			  .subtotalsOfPercentageAtGroupFooter(
+			  	countryGroup, countryPercentage)
+			  .subtotalsOfPercentageAtGroupFooter(
+			  	itemGroup, itemInCountryPercentage, itemPercentage)
+			  .title(Templates.createTitleComponent("PercentageSubtotal"))
+			  .pageFooter(Templates.footerComponent)
+			  .setDataSource(createDataSource())
+			  .show();
 		} catch (DRException e) {
-			e.printStackTrace();	
-		}		
+			e.printStackTrace();
+		}
 	}
 	
 	private JRDataSource createDataSource() {

@@ -47,23 +47,23 @@ public class FieldSubtotalReport {
 		TextColumnBuilder<String> itemColumn      = col.column("Item",       "item",      type.stringType());
 		TextColumnBuilder<Date>   orderDateColumn = col.column("Order Date", "orderdate", type.dateType());
 		
-		AggregationSubtotalBuilder<Integer> quantitySum     = sbt.sum("quantity", Integer.class, itemColumn).setLabel("quantity sum");		
+		AggregationSubtotalBuilder<Integer> quantitySum     = sbt.sum("quantity", Integer.class, itemColumn).setLabel("quantity sum");
 		AggregationSubtotalBuilder<BigDecimal> unitPriceSum = sbt.sum("unitprice", BigDecimal.class, itemColumn).setLabel("unitPrice sum");
 		
-		try {			
+		try {
 			report()
-		  .setTemplate(Templates.reportTemplate)
-		  .columns(
-		  		itemColumn,	orderDateColumn)
-		  .subtotalsAtSummary(
-		  		quantitySum, unitPriceSum)
-		  .title(Templates.createTitleComponent("FieldSubtotal"))
-		  .pageFooter(Templates.footerComponent)
-		  .setDataSource(createDataSource())
-		  .show();						
+			  .setTemplate(Templates.reportTemplate)
+			  .columns(
+			  	itemColumn,	orderDateColumn)
+			  .subtotalsAtSummary(
+			  	quantitySum, unitPriceSum)
+			  .title(Templates.createTitleComponent("FieldSubtotal"))
+			  .pageFooter(Templates.footerComponent)
+			  .setDataSource(createDataSource())
+			  .show();
 		} catch (DRException e) {
-			e.printStackTrace();	
-		}		
+			e.printStackTrace();
+		}
 	}
 	
 	private JRDataSource createDataSource() {

@@ -49,26 +49,26 @@ public class GroupSubtotalReport {
 		
 		ColumnGroupBuilder countryGroup = grp.group(countryColumn);
 		
-		try {			
+		try {
 			report()
-		  .setTemplate(Templates.reportTemplate)
-		  .columns(
-		  		countryColumn, itemColumn, quantityColumn, priceColumn)
-		  .groupBy(
-		  		countryGroup)
-		  .subtotalsAtFirstGroupFooter(
-		  		sbt.sum(quantityColumn))
-		  .subtotalsAtGroupFooter(
-		  		countryGroup, sbt.sum(priceColumn))
-		  .subtotalsAtSummary(
-		  		sbt.sum(quantityColumn), sbt.sum(priceColumn))
-		  .title(Templates.createTitleComponent("GroupSubtotal"))
-		  .pageFooter(Templates.footerComponent)
-		  .setDataSource(createDataSource())
-		  .show();						
+			  .setTemplate(Templates.reportTemplate)
+			  .columns(
+			  	countryColumn, itemColumn, quantityColumn, priceColumn)
+			  .groupBy(
+			  	countryGroup)
+			  .subtotalsAtFirstGroupFooter(
+			  	sbt.sum(quantityColumn))
+			  .subtotalsAtGroupFooter(
+			  	countryGroup, sbt.sum(priceColumn))
+			  .subtotalsAtSummary(
+			  	sbt.sum(quantityColumn), sbt.sum(priceColumn))
+			  .title(Templates.createTitleComponent("GroupSubtotal"))
+			  .pageFooter(Templates.footerComponent)
+			  .setDataSource(createDataSource())
+			  .show();
 		} catch (DRException e) {
-			e.printStackTrace();	
-		}		
+			e.printStackTrace();
+		}
 	}
 	
 	private JRDataSource createDataSource() {

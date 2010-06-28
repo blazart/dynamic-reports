@@ -51,16 +51,16 @@ public class FieldGroupReport {
 		                                  .setStyle(groupStyle)
 		                                  .setTitle("Item")
 		                                  .setTitleStyle(groupStyle)
-				                              .setTitleWidth(30)		                                  
+		                                  .setTitleWidth(30)
 		                                  .setHeaderLayout(GroupHeaderLayout.TITLE_AND_VALUE);
 		
 		try {			
 			report()
 			  .setTemplate(Templates.reportTemplate)
 			  .columns(
-			  		col.column("Order date", "orderdate", type.dateType()),
-			  		col.column("Quantity",   "quantity",  type.integerType()),
-			  		col.column("Unit price", "unitprice", type.bigDecimalType()))
+			  	col.column("Order date", "orderdate", type.dateType()),
+			  	col.column("Quantity",   "quantity",  type.integerType()),
+			  	col.column("Unit price", "unitprice", type.bigDecimalType()))
 			  .groupBy(itemGroup)
 			  .title(Templates.createTitleComponent("FieldGroup"))
 			  .pageFooter(Templates.footerComponent)

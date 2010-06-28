@@ -23,59 +23,63 @@ package net.sf.dynamicreports.examples.miscellaneous;
 
 import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+import java.math.BigDecimal;
 
-import net.sf.dynamicreports.examples.complex.ReportData;
-import net.sf.dynamicreports.examples.complex.ReportDesign;
-import net.sf.dynamicreports.examples.complex.invoice.InvoiceData;
-import net.sf.dynamicreports.examples.complex.invoice.InvoiceDesign;
-import net.sf.dynamicreports.examples.complex.sales.SalesData;
-import net.sf.dynamicreports.examples.complex.sales.SalesDesign;
+import net.sf.dynamicreports.examples.DataSource;
+import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
-import net.sf.dynamicreports.report.builder.DynamicReports;
+import net.sf.dynamicreports.jasper.builder.export.Exporters;
+import net.sf.dynamicreports.report.constant.PageType;
 import net.sf.dynamicreports.report.exception.DRException;
+import net.sf.jasperreports.engine.JRDataSource;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class ConcatenatedReport {
+public class ConcatenatedReport2 {
 	
-	public ConcatenatedReport() {
+	public ConcatenatedReport2() {
 		build();
 	}
 	
-	private void build() {				
-		try {									
+	private void build() {
+		try {
 			concatenatedReport()
 			  .concatenate(
-			  		invoiceReport(), salesReport())
-			  .toPdf(new FileOutputStream("c:/report.pdf"));
+			  	createReport(PageType.A4),
+			  	createReport(PageType.A3),
+			  	createReport(PageType.A5))
+			  .toPdf(Exporters.pdfExporter("c:/report.pdf"));
 		} catch (DRException e) {
 			e.printStackTrace();	
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}		
-	}
-	
-	private JasperReportBuilder invoiceReport() {	
-		return createReport(new InvoiceDesign(), new InvoiceData());
-	}
-
-	private JasperReportBuilder salesReport() {	
-		return createReport(new SalesDesign(), new SalesData());
-	}
-	
-	private <T extends ReportData> JasperReportBuilder createReport(ReportDesign<T> design, T data) {
-		JasperReportBuilder reportBuilder = DynamicReports.report();
-		if (data != null) {
-			reportBuilder.setDataSource(data.createDataSource());
 		}
-		design.configureReport(reportBuilder, data);	
-		return reportBuilder;
+	}
+	
+	private JasperReportBuilder createReport(PageType pageType) {
+		JasperReportBuilder report = report();
+		report
+		  .setTemplate(Templates.reportTemplate)
+		  .setPageFormat(pageType)
+		  .columns(
+		  	col.column("Item",       "item",      type.stringType()),
+		  	col.column("Quantity",   "quantity",  type.integerType()),
+		  	col.column("Unit price", "unitprice", type.bigDecimalType()))
+		  .title(Templates.createTitleComponent(pageType.name() + "Report"))
+		  .pageFooter(Templates.footerComponent)
+		  .setDataSource(createDataSource());		
+		
+		return report;
+	}
+	
+	private JRDataSource createDataSource() {
+		DataSource dataSource = new DataSource("item", "quantity", "unitprice");
+		for (int i = 0; i < 20; i++) {
+			dataSource.add("Book", (int) (Math.random() * 10) + 1, new BigDecimal(Math.random() * 100 + 1));
+		}
+		return dataSource;
 	}
 	
 	public static void main(String[] args) {
-		new ConcatenatedReport();
+		new ConcatenatedReport2();
 	}
 }

@@ -54,7 +54,7 @@ public class CalculatedColumnReport {
 			report()
 			  .setTemplate(Templates.reportTemplate)
 			  .columns(
-			  		column1, column2, column3, column4, column5, column6, column7, column8)
+			  	column1, column2, column3, column4, column5, column6, column7, column8)
 			  .title(Templates.createTitleComponent("CalculatedColumn"))
 			  .pageFooter(Templates.footerComponent)
 			  .setDataSource(createDataSource())

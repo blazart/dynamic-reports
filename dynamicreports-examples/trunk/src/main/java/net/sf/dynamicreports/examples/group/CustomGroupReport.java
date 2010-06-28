@@ -45,14 +45,14 @@ public class CustomGroupReport {
 	private void build() {				
 		CustomGroupBuilder yearGroup = grp.group(new YearExpression());
 		
-		try {			
+		try {
 			report()
 			  .setTemplate(Templates.reportTemplate)
 			  .columns(
-			  		col.column("Order date", "orderdate", type.stringType()),
-			  		col.column("Item",       "item",      type.stringType()),
-			  		col.column("Quantity",   "quantity",  type.integerType()),
-			  		col.column("Unit price", "unitprice", type.bigDecimalType()))
+			  	col.column("Order date", "orderdate", type.stringType()),
+			  	col.column("Item",       "item",      type.stringType()),
+			  	col.column("Quantity",   "quantity",  type.integerType()),
+			  	col.column("Unit price", "unitprice", type.bigDecimalType()))
 			  .groupBy(yearGroup)
 			  .title(Templates.createTitleComponent("CustomGroup"))
 			  .pageFooter(Templates.footerComponent)

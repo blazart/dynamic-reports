@@ -19,7 +19,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
  * USA. 
  */
-package net.sf.dynamicreports.examples.column;
+package net.sf.dynamicreports.examples.miscellaneous;
 
 import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 
@@ -27,56 +27,49 @@ import java.math.BigDecimal;
 
 import net.sf.dynamicreports.examples.DataSource;
 import net.sf.dynamicreports.examples.Templates;
-import net.sf.dynamicreports.report.builder.FieldBuilder;
-import net.sf.dynamicreports.report.builder.column.PercentageColumnBuilder;
-import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
+import net.sf.dynamicreports.jasper.builder.export.Exporters;
+import net.sf.dynamicreports.jasper.builder.export.JasperPdfExporterBuilder;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class PercentageColumnsReport {
-	private FieldBuilder<BigDecimal> unitPriceField;
+public class EncryptedPdfReport {
 	
-	public PercentageColumnsReport() {
+	public EncryptedPdfReport() {
 		build();
 	}
 	
 	private void build() {
 		try {
-			unitPriceField = field("unitprice", BigDecimal.class);
-			
-			TextColumnBuilder<String>  itemColumn          = col.column("Item", "item", type.stringType());
-			TextColumnBuilder<Integer> quantityColumn      = col.column("Quantity", "quantity", type.integerType());
-			PercentageColumnBuilder    quantityPercColumn  = col.percentageColumn("Quantity [%]", quantityColumn);
-			PercentageColumnBuilder    unitPricePercColumn = col.percentageColumn("Unit price [%]", unitPriceField);
+			JasperPdfExporterBuilder pdfExporter = Exporters.pdfExporter("c:/report.pdf")
+			                                                .encrypted("1234");
 			
 			report()
 			  .setTemplate(Templates.reportTemplate)
-			  .fields(
-			  	unitPriceField)
 			  .columns(
-			  	itemColumn, quantityColumn, quantityPercColumn, unitPricePercColumn)
-			  .title(Templates.createTitleComponent("PercentageColumns"))
+			  	col.column("Item",       "item",      type.stringType()),
+			  	col.column("Quantity",   "quantity",  type.integerType()),
+			  	col.column("Unit price", "unitprice", type.bigDecimalType()))
+			  .title(Templates.createTitleComponent("EncryptedPdfReport"))
 			  .pageFooter(Templates.footerComponent)
 			  .setDataSource(createDataSource())
-			  .show();
+			  .toPdf(pdfExporter);
 		} catch (DRException e) {
-			e.printStackTrace();
+			e.printStackTrace();	
 		}
 	}
 	
 	private JRDataSource createDataSource() {
 		DataSource dataSource = new DataSource("item", "quantity", "unitprice");
-		dataSource.add("Book", 3, new BigDecimal(11));
-		dataSource.add("Book", 1, new BigDecimal(15));
-		dataSource.add("Book", 5, new BigDecimal(10));
-		dataSource.add("Book", 8, new BigDecimal(9));
+		for (int i = 0; i < 20; i++) {
+			dataSource.add("Book", (int) (Math.random() * 10) + 1, new BigDecimal(Math.random() * 100 + 1));
+		}
 		return dataSource;
 	}
 	
 	public static void main(String[] args) {
-		new PercentageColumnsReport();
+		new EncryptedPdfReport();
 	}
 }

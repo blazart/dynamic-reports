@@ -42,27 +42,27 @@ public class PageFormatReport {
 		build();
 	}
 	
-	private void build() {		
+	private void build() {
 		TextColumnBuilder<String>     itemColumn     = col.column("Item",       "item",      type.stringType());
 		TextColumnBuilder<Integer>    quantityColumn = col.column("Quantity",   "quantity",  type.integerType());
 		TextColumnBuilder<BigDecimal> priceColumn    = col.column("Unit price", "unitprice", type.bigDecimalType());
 		
-		try {			
+		try {
 			report()
-		  .setTemplate(Templates.reportTemplate)
-		  .setPageFormat(PageType.A5, PageOrientation.LANDSCAPE)
-		  .setPageColumnsPerPage(3)
-		  .setPageColumnSpace(15)
-		  .setPageMargin(margin(20))
-		  .columns(
-		  		itemColumn, quantityColumn, priceColumn)
-		  .title(Templates.createTitleComponent("PageFormat"))
-		  .pageFooter(Templates.footerComponent)
-		  .setDataSource(createDataSource())
-		  .show();						
+			  .setTemplate(Templates.reportTemplate)
+			  .setPageFormat(PageType.A5, PageOrientation.LANDSCAPE)
+			  .setPageColumnsPerPage(3)
+			  .setPageColumnSpace(15)
+			  .setPageMargin(margin(20))
+			  .columns(
+			  	itemColumn, quantityColumn, priceColumn)
+			  .title(Templates.createTitleComponent("PageFormat"))
+			  .pageFooter(Templates.footerComponent)
+			  .setDataSource(createDataSource())
+			  .show();
 		} catch (DRException e) {
-			e.printStackTrace();	
-		}		
+			e.printStackTrace();
+		}
 	}
 	
 	private JRDataSource createDataSource() {

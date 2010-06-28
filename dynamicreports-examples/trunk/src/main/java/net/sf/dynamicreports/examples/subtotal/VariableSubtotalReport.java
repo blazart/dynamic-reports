@@ -57,22 +57,22 @@ public class VariableSubtotalReport {
 		                                                    .setLabel("sum(price) / sum(quantity)")
 		                                                    .setDataType(type.bigDecimalType());
 		
-		try {			
+		try {
 			report()
-		  .setTemplate(Templates.reportTemplate)
-		  .variables(
-		  		quantitySum, priceSum)
-		  .columns(
-		  		itemColumn)
-		  .subtotalsAtSummary(
-		  		unitPriceSbt)
-		  .title(Templates.createTitleComponent("VariableSubtotal"))
-		  .pageFooter(Templates.footerComponent)
-		  .setDataSource(createDataSource())
-		  .show();						
+			  .setTemplate(Templates.reportTemplate)
+			  .variables(
+			  	quantitySum, priceSum)
+			  .columns(
+			  	itemColumn)
+			  .subtotalsAtSummary(
+			  	unitPriceSbt)
+			  .title(Templates.createTitleComponent("VariableSubtotal"))
+			  .pageFooter(Templates.footerComponent)
+			  .setDataSource(createDataSource())
+			  .show();
 		} catch (DRException e) {
-			e.printStackTrace();	
-		}		
+			e.printStackTrace();
+		}
 	}
 	
 	private class UnitPriceSubtotal extends AbstractSimpleExpression<BigDecimal> {
