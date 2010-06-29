@@ -19,7 +19,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
  * USA. 
  */
-package net.sf.dynamicreports.examples.miscellaneous;
+package net.sf.dynamicreports.examples.exporter;
 
 import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 
@@ -43,7 +43,8 @@ public class EncryptedPdfReport {
 	private void build() {
 		try {
 			JasperPdfExporterBuilder pdfExporter = export.pdfExporter("c:/report.pdf")
-			                                             .encrypted("1234");
+			                                             .setEncrypted(true)
+			                                             .setUserPassword("1234");
 			
 			report()
 			  .setTemplate(Templates.reportTemplate)

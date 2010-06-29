@@ -5,6 +5,7 @@ Changes in version 1.2.0 (2010-06-29)
 ---------------------------------------------------
 - new examples - examples/subtotals/*
                  examples/miscellaneous/*
+                 examples/exporter/*
                  examples/column/CalculatedColumnReport
 
 Changes in version 1.1.1 (2010-06-09)

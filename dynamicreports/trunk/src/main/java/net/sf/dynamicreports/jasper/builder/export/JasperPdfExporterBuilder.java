@@ -21,12 +21,12 @@
  */
 package net.sf.dynamicreports.jasper.builder.export;
 
-import java.util.List;
-
 import net.sf.dynamicreports.jasper.base.export.JasperPdfExporter;
 import net.sf.dynamicreports.jasper.constant.PdfPermission;
 import net.sf.dynamicreports.jasper.constant.PdfVersion;
 import net.sf.dynamicreports.report.constant.Constants;
+
+import org.apache.commons.lang.Validate;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -46,12 +46,6 @@ public class JasperPdfExporterBuilder extends AbstractJasperExporterBuilder<Jasp
 	
 	public JasperPdfExporterBuilder setCompressed(Boolean compressed) {
 		this.getObject().setCompressed(compressed);
-		return this;
-	}
-
-	public JasperPdfExporterBuilder encrypted(String userPassword) {
-		this.getObject().setEncrypted(true);
-		this.getObject().setUserPassword(userPassword);
 		return this;
 	}
 	
@@ -75,8 +69,16 @@ public class JasperPdfExporterBuilder extends AbstractJasperExporterBuilder<Jasp
 		return this;
 	}
 	
-	public JasperPdfExporterBuilder setPermissions(List<PdfPermission> permissions) {
-		this.getObject().setPermissions(permissions);
+	public JasperPdfExporterBuilder permissions(PdfPermission ...permissions) {
+		return addPermission(permissions);
+	}
+
+	public JasperPdfExporterBuilder addPermission(PdfPermission ...permissions) {
+		Validate.notNull(permissions, "permissions must not be null");
+		Validate.noNullElements(permissions, "permissions must not contains null permission");
+		for (PdfPermission permission : permissions) {
+			this.getObject().addPermission(permission);
+		}		
 		return this;
 	}
 	

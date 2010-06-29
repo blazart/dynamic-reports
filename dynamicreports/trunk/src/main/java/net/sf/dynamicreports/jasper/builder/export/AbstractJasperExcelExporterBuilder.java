@@ -21,10 +21,10 @@
  */
 package net.sf.dynamicreports.jasper.builder.export;
 
-import java.util.List;
-
 import net.sf.dynamicreports.jasper.base.export.AbstractJasperExcelExporter;
 import net.sf.dynamicreports.report.constant.Constants;
+
+import org.apache.commons.lang.Validate;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -62,8 +62,16 @@ public abstract class AbstractJasperExcelExporterBuilder<T extends AbstractJaspe
 		return (T) this;
 	}
 	
-	public T setSheetNames(List<String> sheetNames) {
-		this.getObject().setSheetNames(sheetNames);
+	public T sheetNames(String ...sheetNames) {
+		return addSheetName(sheetNames);
+	}
+
+	public T addSheetName(String ...sheetNames) {
+		Validate.notNull(sheetNames, "sheetNames must not be null");
+		Validate.noNullElements(sheetNames, "sheetNames must not contains null sheetName");
+		for (String sheetName : sheetNames) {
+			this.getObject().addSheetName(sheetName);
+		}		
 		return (T) this;
 	}
 	

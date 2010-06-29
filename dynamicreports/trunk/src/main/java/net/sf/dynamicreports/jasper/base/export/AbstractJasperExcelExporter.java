@@ -99,6 +99,10 @@ public abstract class AbstractJasperExcelExporter extends AbstractJasperExporter
 	public void setSheetNames(List<String> sheetNames) {
 		this.sheetNames = sheetNames;
 	}
+
+	public void addSheetName(String sheetName) {
+		this.sheetNames.add(sheetName);
+	}
 	
 	public Boolean getFontSizeFixEnabled() {
 		return fontSizeFixEnabled;

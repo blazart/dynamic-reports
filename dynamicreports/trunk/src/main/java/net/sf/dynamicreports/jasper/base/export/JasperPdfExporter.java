@@ -114,6 +114,10 @@ public class JasperPdfExporter extends AbstractJasperExporter implements JasperI
 		this.permissions = permissions;
 	}
 	
+	public void addPermission(PdfPermission permission) {
+		this.permissions.add(permission);
+	}	
+	
 	public PdfVersion getPdfVersion() {
 		return pdfVersion;
 	}
@@ -200,5 +204,5 @@ public class JasperPdfExporter extends AbstractJasperExporter implements JasperI
 	
 	public void setTagLanguage(String tagLanguage) {
 		this.tagLanguage = tagLanguage;
-	}	
+	}
 }
