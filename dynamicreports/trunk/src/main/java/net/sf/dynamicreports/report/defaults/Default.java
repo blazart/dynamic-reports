@@ -70,6 +70,7 @@ public class Default {
 	private DRStyle subtotalStyle;
 	private DRStyle imageStyle;
 	private DRStyle chartStyle;
+	private DRStyle barcodeStyle;
 	//page
 	private int pageWidth;
 	private int pageHeight;
@@ -108,6 +109,9 @@ public class Default {
 	private List<Color> chartSeriesColors;
 	private boolean chartCategoryDatasetUseSeriesAsCategory;
 	private TimePeriod chartTimeSeriesDatasetTimePeriodType;
+	//barcode
+	private int barcodeWidth;
+	private int barcodeHeight;	
 	//split
 	private SplitType defaultSplitType;
 	private SplitType titleSplitType;
@@ -181,7 +185,8 @@ public class Default {
 		this.subtotalStyle = null;
 		this.imageStyle = new DRStyle();
 		imageStyle.setImageScale(ImageScale.FILL_PROPORTIONALLY);
-		chartStyle = null;
+		this.chartStyle = null;
+		this.barcodeStyle = null;
 		
 		this.pageWidth = PageType.A4.getWidth();
 		this.pageHeight = PageType.A4.getHeight();
@@ -220,6 +225,9 @@ public class Default {
 		this.chartSeriesColors = new ArrayList<Color>();
 		this.chartCategoryDatasetUseSeriesAsCategory = false;
 		this.chartTimeSeriesDatasetTimePeriodType = TimePeriod.DAY;
+		
+		this.barcodeWidth = 100;
+		this.barcodeHeight = 100;
 		
 		this.defaultSplitType = null;		
 		this.titleSplitType = null;
@@ -342,6 +350,10 @@ public class Default {
 		return chartStyle;
 	}
 
+	public DRStyle getBarcodeStyle() {
+		return barcodeStyle;
+	}
+	
 	public int getPageWidth() {
 		return pageWidth;
 	}
@@ -460,6 +472,14 @@ public class Default {
 	
 	public TimePeriod getChartTimeSeriesDatasetTimePeriodType() {
 		return chartTimeSeriesDatasetTimePeriodType;
+	}
+	
+	public int getBarcodeWidth() {
+		return barcodeWidth;
+	}
+
+	public int getBarcodeHeight() {
+		return barcodeHeight;
 	}
 	
 	public SplitType getDefaultSplitType() {

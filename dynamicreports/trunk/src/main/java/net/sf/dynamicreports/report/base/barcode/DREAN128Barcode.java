@@ -19,28 +19,25 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
  * USA. 
  */
-package net.sf.dynamicreports.design.definition.component;
+package net.sf.dynamicreports.report.base.barcode;
 
-import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
-import net.sf.dynamicreports.design.definition.style.DRIDesignStyle;
+import net.sf.dynamicreports.report.constant.BarcodeChecksumMode;
+import net.sf.dynamicreports.report.constant.Constants;
+import net.sf.dynamicreports.report.definition.barcode.DRIEAN128Barcode;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DRIDesignComponent {
-	public String getName();
+public class DREAN128Barcode extends DRBarcode implements DRIEAN128Barcode {
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 	
-	public String getUniqueName();
-	
-	public DRIDesignStyle getStyle();
+	private BarcodeChecksumMode checksumMode;
 
-	public Integer getX();
+	public BarcodeChecksumMode getChecksumMode() {
+		return checksumMode;
+	}
 
-	public Integer getY();
-	
-	public Integer getWidth();
-	
-	public Integer getHeight();
-	
-	public DRIDesignSimpleExpression getPrintWhenExpression();
+	public void setChecksumMode(BarcodeChecksumMode checksumMode) {
+		this.checksumMode = checksumMode;
+	}	
 }

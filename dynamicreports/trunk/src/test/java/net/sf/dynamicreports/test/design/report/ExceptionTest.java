@@ -40,7 +40,7 @@ public class ExceptionTest {
 
 	@Test
 	public void testComponentFixedWidth() {
-		@SuppressWarnings("unchecked")
+		@SuppressWarnings("rawtypes")
 		ReportBuilder<?> rb1 = new ReportBuilder();		
 		rb1.title(cmp.text("").setFixedWidth(600));
 		try {
@@ -49,7 +49,7 @@ public class ExceptionTest {
 		} catch (DRException e) {
 		}
 		
-		@SuppressWarnings("unchecked")
+		@SuppressWarnings("rawtypes")
 		ReportBuilder<?> rb2 = new ReportBuilder();		
 		rb2.title(cmp.horizontalList(cmp.text("").setFixedWidth(600)));
 		try {
@@ -58,7 +58,7 @@ public class ExceptionTest {
 		} catch (DRException e) {
 		}
 		
-		@SuppressWarnings("unchecked")
+		@SuppressWarnings("rawtypes")
 		ReportBuilder<?> rb3 = new ReportBuilder();		
 		rb3.title(cmp.horizontalFlowList(cmp.text("").setFixedWidth(600)));
 		try {
@@ -70,7 +70,7 @@ public class ExceptionTest {
 	
 	@Test
 	public void testComponentMinimumWidth() {
-		@SuppressWarnings("unchecked")
+		@SuppressWarnings("rawtypes")
 		ReportBuilder<?> rb1 = new ReportBuilder();		
 		rb1.title(cmp.text("").setMinWidth(600));
 		try {
@@ -79,7 +79,7 @@ public class ExceptionTest {
 		} catch (DRException e) {	
 		}
 		
-		@SuppressWarnings("unchecked")
+		@SuppressWarnings("rawtypes")
 		ReportBuilder<?> rb2 = new ReportBuilder();		
 		rb2.title(cmp.horizontalList(cmp.text("").setMinWidth(600)));
 		try {
@@ -88,7 +88,7 @@ public class ExceptionTest {
 		} catch (DRException e) {
 		}
 		
-		@SuppressWarnings("unchecked")
+		@SuppressWarnings("rawtypes")
 		ReportBuilder<?> rb3 = new ReportBuilder();		
 		rb3.title(cmp.horizontalFlowList(cmp.text("").setMinWidth(600)));
 		try {
@@ -102,7 +102,7 @@ public class ExceptionTest {
 	public void testVariable() {
 		TextColumnBuilder<Object> column = col.column("fieldName", Object.class);
 		ColumnGroupBuilder group = grp.group(column);
-		@SuppressWarnings("unchecked")
+		@SuppressWarnings({ "unchecked", "rawtypes" })
 		ReportBuilder<?> rb1 = new ReportBuilder()
 			.columns(column)
 			.groupBy(group)
@@ -113,7 +113,7 @@ public class ExceptionTest {
 		} catch (DRException e) {	
 		}
 		
-		@SuppressWarnings("unchecked")
+		@SuppressWarnings({ "unchecked", "rawtypes" })
 		ReportBuilder<?> rb2 = new ReportBuilder()
 			.columns(column)
 			.groupBy(group)

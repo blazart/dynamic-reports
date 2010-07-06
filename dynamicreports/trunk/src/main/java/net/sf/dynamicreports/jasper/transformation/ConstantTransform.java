@@ -29,6 +29,9 @@ import net.sf.dynamicreports.jasper.constant.PdfPermission;
 import net.sf.dynamicreports.jasper.constant.PdfVersion;
 import net.sf.dynamicreports.jasper.constant.SizeUnit;
 import net.sf.dynamicreports.jasper.exception.JasperDesignException;
+import net.sf.dynamicreports.report.constant.BarcodeChecksumMode;
+import net.sf.dynamicreports.report.constant.BarcodeOrientation;
+import net.sf.dynamicreports.report.constant.BarcodeTextPosition;
 import net.sf.dynamicreports.report.constant.Calculation;
 import net.sf.dynamicreports.report.constant.ChartType;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
@@ -43,6 +46,7 @@ import net.sf.dynamicreports.report.constant.SplitType;
 import net.sf.dynamicreports.report.constant.TimePeriod;
 import net.sf.dynamicreports.report.constant.VerticalAlignment;
 import net.sf.dynamicreports.report.constant.WhenNoDataType;
+import net.sf.jasperreports.components.barcode4j.BarcodeComponent;
 import net.sf.jasperreports.engine.JRAlignment;
 import net.sf.jasperreports.engine.JRBand;
 import net.sf.jasperreports.engine.JRChart;
@@ -69,6 +73,8 @@ import org.jfree.data.time.Quarter;
 import org.jfree.data.time.Second;
 import org.jfree.data.time.Week;
 import org.jfree.data.time.Year;
+import org.krysalis.barcode4j.ChecksumMode;
+import org.krysalis.barcode4j.HumanReadablePlacement;
 
 import com.lowagie.text.pdf.PdfWriter;
 
@@ -341,8 +347,9 @@ class ConstantTransform {
 	}
 
 	protected static Byte chartPosition(Position position) {
-		if (position == null)
+		if (position == null) {
 			return null;
+		}
 		
 		switch (position) {
 		case TOP:			
@@ -440,5 +447,56 @@ class ConstantTransform {
 			}
 		}
 		return permission;
+	}
+
+	public static int barcodeOrientation(BarcodeOrientation orientation) {
+		switch (orientation) {
+		case NONE:
+			return BarcodeComponent.ORIENTATION_UP;
+		case LEFT:
+			return BarcodeComponent.ORIENTATION_LEFT;
+		case RIGHT:
+			return BarcodeComponent.ORIENTATION_RIGHT;
+		case UPSIDE_DOWN:
+			return BarcodeComponent.ORIENTATION_DOWN;
+		default:
+			throw new JasperDesignException("BarcodeOrientation " + orientation.name() + " not supported");
+		}
+	}
+
+	public static HumanReadablePlacement barcodeTextPosition(BarcodeTextPosition textPosition) {
+		if (textPosition == null) {
+			return null;
+		}
+		
+		switch (textPosition) {
+		case NONE:
+			return HumanReadablePlacement.HRP_NONE;
+		case BOTTOM:
+			return HumanReadablePlacement.HRP_BOTTOM;
+		case TOP:
+			return HumanReadablePlacement.HRP_TOP;			
+		default:
+			throw new JasperDesignException("BarcodeTextPosition " + textPosition.name() + " not supported");
+		}
+	}
+
+	public static ChecksumMode barcodeChecksumMode(BarcodeChecksumMode checksumMode) {
+		if (checksumMode == null) {
+			return null;
+		}
+		
+		switch (checksumMode) {
+		case AUTO:
+			return ChecksumMode.CP_AUTO;
+		case IGNORE:
+			return ChecksumMode.CP_IGNORE;
+		case ADD:
+			return ChecksumMode.CP_ADD;
+		case CHECK:
+			return ChecksumMode.CP_CHECK;
+		default:
+			throw new JasperDesignException("BarcodeChecksumMode " + checksumMode.name() + " not supported");
+		}
 	}
 }

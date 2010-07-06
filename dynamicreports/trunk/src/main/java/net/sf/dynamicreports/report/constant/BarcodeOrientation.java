@@ -19,28 +19,14 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
  * USA. 
  */
-package net.sf.dynamicreports.design.definition.component;
-
-import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
-import net.sf.dynamicreports.design.definition.style.DRIDesignStyle;
+package net.sf.dynamicreports.report.constant;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DRIDesignComponent {
-	public String getName();
-	
-	public String getUniqueName();
-	
-	public DRIDesignStyle getStyle();
-
-	public Integer getX();
-
-	public Integer getY();
-	
-	public Integer getWidth();
-	
-	public Integer getHeight();
-	
-	public DRIDesignSimpleExpression getPrintWhenExpression();
+public enum BarcodeOrientation {
+	NONE,
+	LEFT,
+	RIGHT,
+	UPSIDE_DOWN
 }

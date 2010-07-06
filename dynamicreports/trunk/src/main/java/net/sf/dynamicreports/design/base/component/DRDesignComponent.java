@@ -30,6 +30,7 @@ import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpress
  */
 public abstract class DRDesignComponent implements DRIDesignComponent {	
 	private String name;
+	private String uniqueName;
 	private DRDesignStyle style;
 	private Integer x;
 	private Integer y;
@@ -39,6 +40,7 @@ public abstract class DRDesignComponent implements DRIDesignComponent {
 
 	protected DRDesignComponent(String name) {
 		this.name = name;
+		this.uniqueName = name;
 		init();
 	}
 	
@@ -49,10 +51,14 @@ public abstract class DRDesignComponent implements DRIDesignComponent {
 		return name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public String getUniqueName() {
+		return uniqueName;
 	}
-
+	
+	public void setUniqueName(String uniqueName) {
+		this.uniqueName = uniqueName;
+	}
+	
 	public DRDesignStyle getStyle() {
 		return style;
 	}

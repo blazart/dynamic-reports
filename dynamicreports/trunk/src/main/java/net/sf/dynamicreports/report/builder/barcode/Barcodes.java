@@ -19,28 +19,22 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
  * USA. 
  */
-package net.sf.dynamicreports.design.definition.component;
+package net.sf.dynamicreports.report.builder.barcode;
 
-import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
-import net.sf.dynamicreports.design.definition.style.DRIDesignStyle;
+import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DRIDesignComponent {
-	public String getName();
-	
-	public String getUniqueName();
-	
-	public DRIDesignStyle getStyle();
+@SuppressWarnings("ucd")
+public class Barcodes {
 
-	public Integer getX();
-
-	public Integer getY();
+	//EAN128
+	public static EAN128BarcodeBuilder EAN128(String code) {
+		return new EAN128BarcodeBuilder(code);
+	}
 	
-	public Integer getWidth();
-	
-	public Integer getHeight();
-	
-	public DRIDesignSimpleExpression getPrintWhenExpression();
+	public static EAN128BarcodeBuilder EAN128(DRISimpleExpression<String> codeExpression) {
+		return new EAN128BarcodeBuilder(codeExpression);
+	}
 }

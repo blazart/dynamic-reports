@@ -19,28 +19,35 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
  * USA. 
  */
-package net.sf.dynamicreports.design.definition.component;
+package net.sf.dynamicreports.design.definition.barcode;
 
+import net.sf.dynamicreports.design.constant.EvaluationTime;
+import net.sf.dynamicreports.design.definition.DRIDesignGroup;
+import net.sf.dynamicreports.design.definition.component.DRIDesignComponent;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
-import net.sf.dynamicreports.design.definition.style.DRIDesignStyle;
+import net.sf.dynamicreports.report.constant.BarcodeOrientation;
+import net.sf.dynamicreports.report.constant.BarcodeTextPosition;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface DRIDesignComponent {
-	public String getName();
-	
-	public String getUniqueName();
-	
-	public DRIDesignStyle getStyle();
+public interface DRIDesignBarcode extends DRIDesignComponent {
 
-	public Integer getX();
+	public DRIDesignSimpleExpression getCodeExpression();
 
-	public Integer getY();
+	public DRIDesignSimpleExpression getPatternExpression();
+
+	public Double getModuleWidth();
+
+	public BarcodeOrientation getOrientation();
+
+	public BarcodeTextPosition getTextPosition();
+
+	public Double getQuietZone();
+
+	public Double getVerticalQuietZone();
 	
-	public Integer getWidth();
-	
-	public Integer getHeight();
-	
-	public DRIDesignSimpleExpression getPrintWhenExpression();
+	public EvaluationTime getEvaluationTime();
+
+	public DRIDesignGroup getEvaluationGroup();
 }

@@ -6,7 +6,7 @@
 
 	<groupId>net.sourceforge.dynamicreports</groupId>
 	<artifactId>dynamicreports</artifactId>
-	<version>1.2.0</version>
+	<version>1.3.0</version>
 	<packaging>jar</packaging>
 
 	<name>DynamicReports</name>
@@ -76,13 +76,25 @@
 			<artifactId>jaxb-impl</artifactId>
 			<version>2.2</version>
 			<optional>true</optional>
-		</dependency>	
+		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.0</version>
 			<scope>test</scope>	
-		</dependency>  
+		</dependency>
+		<dependency>
+			<groupId>net.sf.barcode4j</groupId>
+			<artifactId>barcode4j</artifactId>
+			<version>2.0</version>
+			<scope>test</scope>			
+		</dependency>
+		<dependency>
+			<groupId>org.apache.xmlgraphics</groupId>
+			<artifactId>batik-bridge</artifactId>
+			<version>1.7</version>
+			<scope>test</scope>
+		</dependency>				  
 		<dependency>
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi</artifactId>

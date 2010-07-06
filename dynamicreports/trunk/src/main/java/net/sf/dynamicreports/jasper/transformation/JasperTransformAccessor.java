@@ -49,4 +49,6 @@ public interface JasperTransformAccessor {
 	public StyleTransform getStyleTransform();
 	
 	public ChartTransform getChartTransform();
+
+	public BarcodeTransform getBarcodeTransform();
 }

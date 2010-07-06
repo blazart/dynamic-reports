@@ -23,6 +23,7 @@ package net.sf.dynamicreports.jasper.transformation;
 
 import net.sf.dynamicreports.design.constant.EvaluationTime;
 import net.sf.dynamicreports.design.definition.DRIDesignHyperLink;
+import net.sf.dynamicreports.design.definition.barcode.DRIDesignBarcode;
 import net.sf.dynamicreports.design.definition.chart.DRIDesignChart;
 import net.sf.dynamicreports.design.definition.component.DRIDesignComponent;
 import net.sf.dynamicreports.design.definition.component.DRIDesignFiller;
@@ -57,6 +58,9 @@ public class ComponentTransform {
 		if (component instanceof DRIDesignChart) {
 			jrElement = accessor.getChartTransform().transform((DRIDesignChart) component);
 		}
+		else if (component instanceof DRIDesignBarcode) {
+			jrElement = accessor.getBarcodeTransform().transform((DRIDesignBarcode) component);
+		}
 		else if (component instanceof DRIDesignList) {
 			jrElement = list((DRIDesignList) component);
 		}
@@ -72,7 +76,7 @@ public class ComponentTransform {
 		else {
 			throw new JasperDesignException("Component " + component.getClass().getName() + " not supported");
 		}
-		jrElement.setKey(component.getName());
+		jrElement.setKey(component.getUniqueName());
 		jrElement.setX(component.getX());
 		jrElement.setY(component.getY());		
 		jrElement.setWidth(component.getWidth());

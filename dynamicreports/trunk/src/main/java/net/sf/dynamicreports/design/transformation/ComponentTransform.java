@@ -24,6 +24,7 @@ package net.sf.dynamicreports.design.transformation;
 import net.sf.dynamicreports.design.base.DRDesignGroup;
 import net.sf.dynamicreports.design.base.DRDesignHyperLink;
 import net.sf.dynamicreports.design.base.DRDesignVariable;
+import net.sf.dynamicreports.design.base.barcode.DRDesignBarcode;
 import net.sf.dynamicreports.design.base.chart.DRDesignChart;
 import net.sf.dynamicreports.design.base.component.DRDesignComponent;
 import net.sf.dynamicreports.design.base.component.DRDesignFiller;
@@ -46,6 +47,7 @@ import net.sf.dynamicreports.report.constant.HorizontalCellComponentAlignment;
 import net.sf.dynamicreports.report.constant.VerticalCellComponentAlignment;
 import net.sf.dynamicreports.report.defaults.Defaults;
 import net.sf.dynamicreports.report.definition.DRIHyperLink;
+import net.sf.dynamicreports.report.definition.barcode.DRIBarcode;
 import net.sf.dynamicreports.report.definition.chart.DRIChart;
 import net.sf.dynamicreports.report.definition.component.DRIComponent;
 import net.sf.dynamicreports.report.definition.component.DRIDimensionComponent;
@@ -83,6 +85,9 @@ public class ComponentTransform {
 		}
 		if (component instanceof DRIChart) {
 			return chart((DRIChart) component, resetType, resetGroup);
+		}
+		if (component instanceof DRIBarcode) {
+			return barcode((DRIBarcode) component, resetType, resetGroup);
 		}
 		throw new DRDesignReportException("Component " + component.getClass().getName() + " not supported");
 	}
@@ -206,6 +211,15 @@ public class ComponentTransform {
 		designChart.setEvaluationTime(evaluationTimeFromResetType(resetType));
 		designChart.setEvaluationGroup(resetGroup);
 		return designChart;
+	}
+	
+	//barcode
+	private DRDesignBarcode barcode(DRIBarcode barcode, ResetType resetType, DRDesignGroup resetGroup) throws DRException {
+		DRDesignBarcode designBarcode = accessor.getBarcodeTransform().transform(barcode);
+		component(designBarcode, barcode, false, DefaultStyleType.BARCODE);
+		designBarcode.setEvaluationTime(evaluationTimeFromResetType(resetType));
+		designBarcode.setEvaluationGroup(resetGroup);
+		return designBarcode;
 	}
 	
 	private EvaluationTime detectEvaluationTime(DRIDesignExpression expression) {

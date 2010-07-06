@@ -97,6 +97,7 @@ public abstract class BaseSubtotalBuilder<T extends BaseSubtotalBuilder<T, U>, U
 		return (T) this;
 	}
 	
+	@SuppressWarnings("rawtypes")
 	public T setDataType(DRIDataType dataType) {
 		getObject().getValueField().setDataType(dataType);
 		return (T) this;

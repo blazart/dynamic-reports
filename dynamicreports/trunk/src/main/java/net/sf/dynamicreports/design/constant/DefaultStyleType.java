@@ -33,5 +33,6 @@ public enum DefaultStyleType {
 	GROUP_TITLE,
 	SUBTOTAL,
 	IMAGE,
-	CHART
+	CHART,
+	BARCODE
 }
