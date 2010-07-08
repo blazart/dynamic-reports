@@ -66,7 +66,7 @@ public class ReportTemplateTest {
 				cmp.horizontalList(
 					cmp.hListCell(cmp.image("")).widthFixed().heightFixedOnTop(),
 					cmp.hListCell(cht.barChart()).widthFixed().heightFixedOnTop(),
-					cmp.hListCell(bcode.EAN128("12345678")).widthFixed().heightFixedOnTop()))
+					cmp.hListCell(bcode.ean128("12345678")).widthFixed().heightFixedOnTop()))
 			.setTemplate(
 					template()
 						.setLocale(Locale.ENGLISH)
@@ -193,7 +193,7 @@ public class ReportTemplateTest {
 						 .setHeaderLayout(GroupHeaderLayout.TITLE_AND_VALUE)
 						 .setHideColumn(false))
 			.subtotalsAtSummary(sbt.sum(column1))
-			.title(cmp.image(""), cht.areaChart().setCategory("field2", String.class), bcode.EAN128("12345678"))
+			.title(cmp.image(""), cht.areaChart().setCategory("field2", String.class), bcode.ean128("12345678"))
 			.setTemplate(
 					template()
 						.setColumnStyle(stl.style().setFontSize(1))

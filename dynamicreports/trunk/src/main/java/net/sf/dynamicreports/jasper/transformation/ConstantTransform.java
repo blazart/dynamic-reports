@@ -29,8 +29,10 @@ import net.sf.dynamicreports.jasper.constant.PdfPermission;
 import net.sf.dynamicreports.jasper.constant.PdfVersion;
 import net.sf.dynamicreports.jasper.constant.SizeUnit;
 import net.sf.dynamicreports.jasper.exception.JasperDesignException;
+import net.sf.dynamicreports.report.constant.BarcodeBaselinePosition;
 import net.sf.dynamicreports.report.constant.BarcodeChecksumMode;
 import net.sf.dynamicreports.report.constant.BarcodeOrientation;
+import net.sf.dynamicreports.report.constant.BarcodeShape;
 import net.sf.dynamicreports.report.constant.BarcodeTextPosition;
 import net.sf.dynamicreports.report.constant.Calculation;
 import net.sf.dynamicreports.report.constant.ChartType;
@@ -73,8 +75,10 @@ import org.jfree.data.time.Quarter;
 import org.jfree.data.time.Second;
 import org.jfree.data.time.Week;
 import org.jfree.data.time.Year;
+import org.krysalis.barcode4j.BaselineAlignment;
 import org.krysalis.barcode4j.ChecksumMode;
 import org.krysalis.barcode4j.HumanReadablePlacement;
+import org.krysalis.barcode4j.impl.datamatrix.SymbolShapeHint;
 
 import com.lowagie.text.pdf.PdfWriter;
 
@@ -497,6 +501,38 @@ class ConstantTransform {
 			return ChecksumMode.CP_CHECK;
 		default:
 			throw new JasperDesignException("BarcodeChecksumMode " + checksumMode.name() + " not supported");
+		}
+	}
+
+	public static SymbolShapeHint barcodeShape(BarcodeShape shape) {
+		if (shape == null) {
+			return null;
+		}
+		
+		switch (shape) {
+		case NONE:
+			return SymbolShapeHint.FORCE_NONE;
+		case SQUARE:
+			return SymbolShapeHint.FORCE_SQUARE;
+		case RECTANGLE:
+			return SymbolShapeHint.FORCE_RECTANGLE;
+		default:
+			throw new JasperDesignException("BarcodeShape " + shape.name() + " not supported");
+		}
+	}
+
+	public static BaselineAlignment barcodeBaselinePosition(BarcodeBaselinePosition baselinePosition) {
+		if (baselinePosition == null) {
+			return null;
+		}
+		
+		switch (baselinePosition) {
+		case TOP:
+			return BaselineAlignment.ALIGN_TOP;
+		case BOTTOM:
+			return BaselineAlignment.ALIGN_BOTTOM;
+		default:
+			throw new JasperDesignException("BarcodeBaselinePosition " + baselinePosition.name() + " not supported");
 		}
 	}
 }
