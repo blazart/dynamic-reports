@@ -27,7 +27,7 @@ import net.sf.dynamicreports.report.definition.barcode.DRIEan13Barcode;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class DREaan13Barcode extends DRChecksumBarcode implements DRIEan13Barcode {
+public class DREan13Barcode extends DRChecksumBarcode implements DRIEan13Barcode {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 	
 }

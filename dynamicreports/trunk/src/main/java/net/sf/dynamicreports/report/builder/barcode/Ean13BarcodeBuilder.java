@@ -21,7 +21,7 @@
  */
 package net.sf.dynamicreports.report.builder.barcode;
 
-import net.sf.dynamicreports.report.base.barcode.DREaan13Barcode;
+import net.sf.dynamicreports.report.base.barcode.DREan13Barcode;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 
@@ -29,14 +29,14 @@ import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 @SuppressWarnings("ucd")
-public class Ean13BarcodeBuilder extends AbstractChecksumBarcodeBuilder<Ean13BarcodeBuilder, DREaan13Barcode> {
+public class Ean13BarcodeBuilder extends AbstractChecksumBarcodeBuilder<Ean13BarcodeBuilder, DREan13Barcode> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 	
 	protected Ean13BarcodeBuilder(String code) {
-		super(code, new DREaan13Barcode());
+		super(code, new DREan13Barcode());
 	}
 
 	protected Ean13BarcodeBuilder(DRISimpleExpression<String> codeExpression) {
-		super(codeExpression, new DREaan13Barcode());
+		super(codeExpression, new DREan13Barcode());
 	}
 }
