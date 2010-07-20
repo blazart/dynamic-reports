@@ -19,28 +19,20 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
  * USA. 
  */
-package net.sf.dynamicreports.report.builder.expression;
+package net.sf.dynamicreports.design.definition.component;
 
-import java.io.InputStream;
-
-import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
-import net.sf.dynamicreports.report.constant.Constants;
-import net.sf.dynamicreports.report.definition.ReportParameters;
+import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-@SuppressWarnings("ucd")
-public class ImageInputStreamExpression extends AbstractSimpleExpression<InputStream> {
-	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
-	
-	private InputStream image;
+public interface DRIDesignSubreport extends DRIDesignComponent {
 
-	public ImageInputStreamExpression(InputStream image) {
-		this.image = image;		
-	}
+	public DRIDesignSimpleExpression getReportExpression();
 	
-	public InputStream evaluate(ReportParameters reportParameters) {
-		return image;
-	}
+	public DRIDesignSimpleExpression getConnectionExpression();
+
+	public DRIDesignSimpleExpression getDataSourceExpression();	
+
+	public Boolean getRunToBottom();
 }

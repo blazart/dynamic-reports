@@ -112,8 +112,12 @@ public class Expressions {
 		return new ImageExpression(image);
 	}
 
-	public static ImageInputStreamExpression image(InputStream image) {
-		return new ImageInputStreamExpression(image);
+	public static InputStreamExpression inputStream(InputStream inputStream) {
+		return new InputStreamExpression(inputStream);
+	}
+
+	public static <T> ValueExpression<T> value(T value) {
+		return new ValueExpression<T>(value);
 	}
 	
 	public static StringExpression text(String text) {

@@ -6,7 +6,7 @@
 
 	<groupId>net.sourceforge.dynamicreports</groupId>
 	<artifactId>dynamicreports-examples</artifactId>
-	<version>1.3.0</version>
+	<version>1.4.0</version>
 	<packaging>jar</packaging>
 
 	<name>DynamicReports - examples</name>
@@ -29,7 +29,7 @@
 		<dependency>
 			<groupId>net.sourceforge.dynamicreports</groupId>
 			<artifactId>dynamicreports</artifactId>
-			<version>1.3.0</version>
+			<version>1.4.0</version>
 		</dependency>  
 		<dependency>
 			<!-- only for JDK 1.5, not required for JDK 1.6 -->

@@ -19,36 +19,22 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
  * USA. 
  */
-package net.sf.dynamicreports.jasper.transformation;
+package net.sf.dynamicreports.report.definition.component;
 
-import java.util.Map;
+import java.sql.Connection;
 
-import net.sf.dynamicreports.design.definition.DRIDesignReport;
-import net.sf.dynamicreports.jasper.base.JasperCustomValues;
-import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public interface JasperTransformAccessor {
-	
-	public DRIDesignReport getReport(); 
-	
-	public JasperDesign getDesign();
-	
-	public JasperCustomValues getCustomValues();
-	
-	public Map<String, Object> getParameters();
-	
-	public ExpressionTransform getExpressionTransform();
+public interface DRISubreport extends DRIDimensionComponent {
 
-	public GroupTransform getGroupTransform();
+	public DRISimpleExpression<?> getReportExpression();
 	
-	public ComponentTransform getComponentTransform();
-	
-	public StyleTransform getStyleTransform();
-	
-	public ChartTransform getChartTransform();
+	public DRISimpleExpression<Connection> getConnectionExpression();
 
-	public BarcodeTransform getBarcodeTransform();
+	public DRISimpleExpression<?> getDataSourceExpression();	
+
+	public Boolean getRunToBottom();
 }

@@ -31,6 +31,7 @@ import net.sf.dynamicreports.design.definition.DRIDesignParameter;
 import net.sf.dynamicreports.design.definition.DRIDesignQuery;
 import net.sf.dynamicreports.design.definition.DRIDesignReport;
 import net.sf.dynamicreports.jasper.base.CustomScriptlet;
+import net.sf.dynamicreports.jasper.base.JasperCustomValues;
 import net.sf.dynamicreports.jasper.constant.ValueType;
 import net.sf.dynamicreports.jasper.exception.JasperDesignException;
 import net.sf.dynamicreports.report.definition.DRIScriptlet;
@@ -57,6 +58,16 @@ public class ReportTransform {
 		JasperDesign design = accessor.getDesign();		
 		Map<String, Object> parameters = accessor.getParameters();
 		
+		JRDesignParameter jrParameter = new JRDesignParameter();
+		jrParameter.setName(JasperCustomValues.CUSTOM_VALUES);
+		jrParameter.setValueClass(JasperCustomValues.class);
+		try {
+			accessor.getDesign().addParameter(jrParameter);
+		} catch (JRException e) {
+			throw new JasperDesignException("Registration failed for parameter \"" + JasperCustomValues.CUSTOM_VALUES + "\"", e);
+		}		
+		accessor.getParameters().put(jrParameter.getName(), accessor.getCustomValues());
+		
 		parameters.put(JRParameter.REPORT_LOCALE, report.getLocale());
 		parameters.put(JRParameter.REPORT_RESOURCE_BUNDLE, report.getResourceBundle());
 		design.setResourceBundle(report.getResourceBundleName());
@@ -82,7 +93,7 @@ public class ReportTransform {
 	private void addParameter(DRIDesignParameter parameter) {
 		try {
 			accessor.getDesign().addParameter(parameter(parameter));		
-			accessor.getScriptlet().addValueType(parameter.getName(), ValueType.PARAMETER);
+			accessor.getCustomValues().addValueType(parameter.getName(), ValueType.PARAMETER);
 			accessor.getParameters().put(parameter.getName(), parameter.getValue());
 		} catch (JRException e) {
 			throw new JasperDesignException("Registration failed for parameter \"" + parameter.getName() + "\"", e);

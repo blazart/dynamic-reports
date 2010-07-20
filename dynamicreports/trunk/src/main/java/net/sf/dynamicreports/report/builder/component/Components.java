@@ -24,8 +24,10 @@ package net.sf.dynamicreports.report.builder.component;
 import java.awt.Image;
 import java.io.InputStream;
 
+import net.sf.dynamicreports.report.builder.ReportBuilder;
 import net.sf.dynamicreports.report.definition.expression.DRIComplexExpression;
 import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
+import net.sf.jasperreports.engine.JasperReport;
 
 import org.apache.commons.lang.Validate;
 
@@ -104,6 +106,7 @@ public class Components {
 		return new TotalPagesBuilder();
 	}
 	
+	//text
 	public static TextFieldBuilder<String> text(String text) {
 		return new TextFieldBuilder<String>().setText(text);
 	}
@@ -120,10 +123,12 @@ public class Components {
 		return new TextFieldBuilder<T>().setText(textExpression);
 	}
 	
+	//filler
 	public static FillerBuilder filler() {
 		return new FillerBuilder();
 	}
 	
+	//image
 	public static ImageBuilder image(DRISimpleExpression<?> imageExpression) {
 		return new ImageBuilder().setImage(imageExpression);
 	}
@@ -138,5 +143,18 @@ public class Components {
 	
 	public static ImageBuilder image(InputStream image) {
 		return new ImageBuilder().setImage(image);
+	}
+	
+	//subreport
+	public static SubreportBuilder subreport(ReportBuilder<?> reportBuilder) {
+		return new SubreportBuilder().setReport(reportBuilder);
+	}
+
+	public static SubreportBuilder subreport(JasperReport jasperReport) {
+		return new SubreportBuilder().setReport(jasperReport);
+	}
+	
+	public static SubreportBuilder subreport(DRISimpleExpression<?> reportExpression) {
+		return new SubreportBuilder().setReport(reportExpression);
 	}
 }

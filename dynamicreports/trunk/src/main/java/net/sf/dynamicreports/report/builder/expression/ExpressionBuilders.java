@@ -97,8 +97,12 @@ public class ExpressionBuilders {
 		return Expressions.image(image);
 	}
 
-	public ImageInputStreamExpression image(InputStream image) {
-		return Expressions.image(image);
+	public InputStreamExpression inputStream(InputStream inputStream) {
+		return Expressions.inputStream(inputStream);
+	}
+	
+	public <T> ValueExpression<T> value(T value) {
+		return Expressions.value(value);
 	}
 	
 	public StringExpression text(String text) {

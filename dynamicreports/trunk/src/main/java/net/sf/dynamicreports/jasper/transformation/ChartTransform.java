@@ -143,7 +143,7 @@ public class ChartTransform {
 	}
 	
 	private void addChartCustomizer(String name, DRIChartCustomizer chartCustomizer) {
-		accessor.getScriptlet().addChartCustomizer(name, chartCustomizer);
+		accessor.getCustomValues().addChartCustomizer(name, chartCustomizer);
 	}
 	
 	//dataset

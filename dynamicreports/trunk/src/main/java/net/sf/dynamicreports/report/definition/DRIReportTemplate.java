@@ -124,6 +124,10 @@ public interface DRIReportTemplate extends Serializable {
 
 	public Integer getBarcodeWidth();
 	
+	public Integer getSubreportHeight();
+
+	public Integer getSubreportWidth();
+	
 	public List<Color> getChartSeriesColors();
 	
 	public SplitType getDefaultSplitType();

@@ -34,7 +34,6 @@ import net.sf.dynamicreports.jasper.transformation.GroupTransform;
 import net.sf.dynamicreports.jasper.transformation.JasperTransformAccessor;
 import net.sf.dynamicreports.jasper.transformation.ReportTransform;
 import net.sf.dynamicreports.jasper.transformation.StyleTransform;
-import net.sf.jasperreports.engine.JRParameter;
 import net.sf.jasperreports.engine.design.JasperDesign;
 
 /**
@@ -52,7 +51,7 @@ public class JasperReportDesign implements JasperTransformAccessor {
 	private BarcodeTransform barcodeTransform;
 	
 	private JasperDesign design;
-	private JasperScriptlet scriptlet;
+	private JasperCustomValues customValues;
 	private Map<String, Object> parameters;	
 	
 	public JasperReportDesign(DRIDesignReport report) {		
@@ -74,10 +73,9 @@ public class JasperReportDesign implements JasperTransformAccessor {
 		this.design = new JasperDesign();
 		design.setName("Report");
 		this.parameters = new HashMap<String, Object>();		
+		this.customValues = new JasperCustomValues();
 		
-		this.scriptlet = new JasperScriptlet();
-		this.design.setScriptletClass(scriptlet.getClass().getName());
-		this.parameters.put(JRParameter.REPORT_SCRIPTLET, this.scriptlet);
+		this.design.setScriptletClass(JasperScriptlet.class.getName());
 	}
 	
 	private void transform() {						
@@ -117,8 +115,8 @@ public class JasperReportDesign implements JasperTransformAccessor {
 		return report;
 	}
 
-	public JasperScriptlet getScriptlet() {
-		return scriptlet;
+	public JasperCustomValues getCustomValues() {
+		return customValues;
 	}
 	
 	public JasperDesign getDesign() {
