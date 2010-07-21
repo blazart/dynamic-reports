@@ -54,4 +54,6 @@ public interface ReportParameters {
 	public DRIScriptlet getScriptlet(String name);	
 	
 	public String getMessage(String key);
+	
+	public ReportParameters getMasterParameters();
 }

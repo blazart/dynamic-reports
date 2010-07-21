@@ -42,7 +42,9 @@ import net.sf.jasperreports.engine.JRVariable;
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-class JasperReportParameters implements ReportParameters {	
+public class JasperReportParameters implements ReportParameters {	
+	public static final String MASTER_REPORT_PARAMETERS = "MASTER_REPORT_PARAMETERS";
+	
 	private JasperScriptlet jasperScriptlet;
 	
 	protected JasperReportParameters(JasperScriptlet jasperScriptlet) {
@@ -161,5 +163,9 @@ class JasperReportParameters implements ReportParameters {
 			values.add(getValue(valueExpression.getName()));
 		}		
 		return complexExpression.evaluate(values, this);
+	}
+
+	public ReportParameters getMasterParameters() {
+		return (ReportParameters) getParameterValue(MASTER_REPORT_PARAMETERS);
 	}
 }

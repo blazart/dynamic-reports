@@ -206,11 +206,10 @@ public class ComponentTransform {
 		return jrSubreport;
 	}
 	
-	public class SubreportExpression implements DRIDesignSimpleExpression {
+	private class SubreportExpression implements DRIDesignSimpleExpression {
 		private String name;
 		private DRIDesignSimpleExpression reportExpression;
 		private Integer pageWidth;
-		private ReportBuilder<?> reportBuilder;
 		private JasperReportDesign reportDesign;
 		
 		public SubreportExpression(DRIDesignSimpleExpression reportExpression, Integer pageWidth) {
@@ -220,17 +219,13 @@ public class ComponentTransform {
 		}
 
 		public Object evaluate(ReportParameters reportParameters) throws DRException {
-			reportBuilder = (JasperReportBuilder) reportExpression.evaluate(reportParameters);
-			reportDesign = new JasperReportDesign(new DRDesignReport(reportBuilder.build(), pageWidth));
+			ReportBuilder<?> reportBuilder = (JasperReportBuilder) reportExpression.evaluate(reportParameters);
+			reportDesign = new JasperReportDesign(new DRDesignReport(reportBuilder.build(), pageWidth), reportParameters);
 			try {
 				return JasperCompileManager.compileReport(reportDesign.getDesign());
 			} catch (JRException e) {
 				throw new DRException(e);
 			}
-		}
-
-		public ReportBuilder<?> getReportBuilder() {
-			return reportBuilder;
 		}
 		
 		public JasperReportDesign getReportDesign() {
@@ -246,7 +241,7 @@ public class ComponentTransform {
 		}
 	}
 	
-	public class SubreportParametersExpression implements DRIDesignSimpleExpression {
+	private class SubreportParametersExpression implements DRIDesignSimpleExpression {
 		private String name;
 		private SubreportExpression subreportExpression;
 		

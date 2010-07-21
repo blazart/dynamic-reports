@@ -34,6 +34,7 @@ import net.sf.dynamicreports.jasper.transformation.GroupTransform;
 import net.sf.dynamicreports.jasper.transformation.JasperTransformAccessor;
 import net.sf.dynamicreports.jasper.transformation.ReportTransform;
 import net.sf.dynamicreports.jasper.transformation.StyleTransform;
+import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.jasperreports.engine.design.JasperDesign;
 
 /**
@@ -53,13 +54,19 @@ public class JasperReportDesign implements JasperTransformAccessor {
 	private JasperDesign design;
 	private JasperCustomValues customValues;
 	private Map<String, Object> parameters;	
+	private ReportParameters masterReportParameters;
 	
 	public JasperReportDesign(DRIDesignReport report) {		
+		this(report, null);
+	}
+
+	public JasperReportDesign(DRIDesignReport report, ReportParameters masterReportParameters) {		
 		this.report = report;
+		this.masterReportParameters = masterReportParameters;
 		init();
 		transform();
 	}
-
+	
 	private void init() {		
 		reportTransform = new ReportTransform(this);
 		expressionTransform = new ExpressionTransform(this);
@@ -125,5 +132,9 @@ public class JasperReportDesign implements JasperTransformAccessor {
 	
 	public Map<String, Object> getParameters() {
 		return parameters;
+	}
+	
+	public ReportParameters getMasterReportParameters() {
+		return masterReportParameters;
 	}
 }
