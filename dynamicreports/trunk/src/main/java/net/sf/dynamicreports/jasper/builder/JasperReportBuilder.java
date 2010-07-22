@@ -401,4 +401,12 @@ public class JasperReportBuilder extends ReportBuilder<JasperReportBuilder> {
 		}
 		return this;
 	}
+	
+	public Connection getConnection() {
+		return connection;
+	}
+	
+	public JRDataSource getDataSource() {
+		return dataSource;
+	}
 }

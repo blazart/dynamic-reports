@@ -21,6 +21,7 @@
  */
 package net.sf.dynamicreports.jasper.transformation;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import net.sf.dynamicreports.design.base.DRDesignReport;
@@ -36,6 +37,7 @@ import net.sf.dynamicreports.design.definition.component.DRIDesignSubreport;
 import net.sf.dynamicreports.design.definition.component.DRIDesignTextField;
 import net.sf.dynamicreports.design.definition.expression.DRIDesignSimpleExpression;
 import net.sf.dynamicreports.jasper.base.JasperReportDesign;
+import net.sf.dynamicreports.jasper.base.JasperReportParameters;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.jasper.exception.JasperDesignException;
 import net.sf.dynamicreports.report.ReportUtils;
@@ -199,6 +201,10 @@ public class ComponentTransform {
 		}
 		else {
 			jrSubreport.setExpression(accessor.getExpressionTransform().getExpression(subreport.getReportExpression()));
+			
+			JasperSubreportParametersExpression parametersExpression = new JasperSubreportParametersExpression();
+			accessor.getExpressionTransform().addSimpleExpression(parametersExpression);
+			jrSubreport.setParametersMapExpression(accessor.getExpressionTransform().getExpression(parametersExpression));
 		}
 		
 		jrSubreport.setPositionType(JRElement.POSITION_TYPE_FLOAT); 
@@ -252,6 +258,28 @@ public class ComponentTransform {
 
 		public Object evaluate(ReportParameters reportParameters) throws DRException {
 			return subreportExpression.getReportDesign().getParameters();
+		}
+
+		public String getName() {
+			return name;
+		}
+
+		public Class<?> getValueClass() {
+			return Map.class;
+		}
+	}
+	
+	private class JasperSubreportParametersExpression implements DRIDesignSimpleExpression {
+		private String name;
+		
+		public JasperSubreportParametersExpression() {
+			this.name = ReportUtils.generateUniqueName("jasperSubreportParametersExpression");
+		}
+
+		public Object evaluate(ReportParameters reportParameters) throws DRException {
+			Map<Object, Object> map = new HashMap<Object, Object>();
+			map.put(JasperReportParameters.MASTER_REPORT_PARAMETERS, reportParameters);
+			return map;
 		}
 
 		public String getName() {

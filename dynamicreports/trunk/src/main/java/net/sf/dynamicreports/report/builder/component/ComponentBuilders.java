@@ -23,6 +23,7 @@ package net.sf.dynamicreports.report.builder.component;
 
 import java.awt.Image;
 import java.io.InputStream;
+import java.net.URL;
 
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.definition.expression.DRIComplexExpression;
@@ -137,8 +138,12 @@ public class ComponentBuilders {
 		return Components.image(image);
 	}
 	
-	public ImageBuilder image(InputStream image) {
-		return Components.image(image);
+	public ImageBuilder image(InputStream imageInputStream) {
+		return Components.image(imageInputStream);
+	}
+	
+	public ImageBuilder image(URL imageUrl) {
+		return Components.image(imageUrl);
 	}
 	
 	//subreport

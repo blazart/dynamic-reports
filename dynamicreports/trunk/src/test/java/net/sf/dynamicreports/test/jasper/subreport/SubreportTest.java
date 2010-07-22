@@ -59,7 +59,7 @@ public class SubreportTest extends AbstractJasperValueTest implements Serializab
 		
 		//title
 		elementCountTest("title.textField1", 5);
-		elementValueTest("title.textField1", "Master1", "Master2", "Master3", "Master4", "Master5");
+		elementValueTest("title.textField1", "Subreport1", "Subreport2", "Subreport3", "Subreport4", "Subreport5");
 		
 		elementCountTest("title.textField2", 5);
 		elementValueTest("title.textField2", "Parameter1", "Parameter2", "Parameter3", "Parameter4", "Parameter5");
@@ -125,7 +125,7 @@ public class SubreportTest extends AbstractJasperValueTest implements Serializab
 			JasperReportBuilder report = report();
 			report
 			  .parameters(parameter("masterRowNumber", masterRowNumber))
-			  .title(cmp.text("Master" + masterRowNumber), cmp.text(new SubreportTitleExpression()));
+			  .title(cmp.text("Subreport" + masterRowNumber), cmp.text(new SubreportTitleExpression()));
 			
 			for (int i = 1; i <= masterRowNumber; i++) {
 			  report.addColumn(col.column("Column" + i, "column" + i, type.stringType()));

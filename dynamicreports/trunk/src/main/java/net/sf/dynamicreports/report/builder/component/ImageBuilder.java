@@ -23,6 +23,7 @@ package net.sf.dynamicreports.report.builder.component;
 
 import java.awt.Image;
 import java.io.InputStream;
+import java.net.URL;
 
 import net.sf.dynamicreports.report.base.component.DRImage;
 import net.sf.dynamicreports.report.builder.expression.Expressions;
@@ -56,8 +57,13 @@ public class ImageBuilder extends HyperLinkComponentBuilder<ImageBuilder, DRImag
 		return this;
 	}
 	
-	public ImageBuilder setImage(InputStream inputStream) {
-		getObject().setImageExpression(Expressions.inputStream(inputStream));
+	public ImageBuilder setImage(InputStream imageInputStream) {
+		getObject().setImageExpression(Expressions.inputStream(imageInputStream));
+		return this;
+	}
+
+	public ImageBuilder setImage(URL imageUrl) {
+		getObject().setImageExpression(Expressions.value(imageUrl));
 		return this;
 	}
 	

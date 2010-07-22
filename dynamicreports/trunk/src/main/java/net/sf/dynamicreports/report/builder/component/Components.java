@@ -23,8 +23,9 @@ package net.sf.dynamicreports.report.builder.component;
 
 import java.awt.Image;
 import java.io.InputStream;
+import java.net.URL;
 
-import net.sf.dynamicreports.report.builder.ReportBuilder;
+import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.definition.expression.DRIComplexExpression;
 import net.sf.dynamicreports.report.definition.expression.DRISimpleExpression;
 import net.sf.jasperreports.engine.JasperReport;
@@ -141,13 +142,25 @@ public class Components {
 		return new ImageBuilder().setImage(image);
 	}
 	
-	public static ImageBuilder image(InputStream image) {
-		return new ImageBuilder().setImage(image);
+	public static ImageBuilder image(InputStream imageInputStream) {
+		return new ImageBuilder().setImage(imageInputStream);
+	}
+	
+	public static ImageBuilder image(URL imageUrl) {
+		return new ImageBuilder().setImage(imageUrl);
 	}
 	
 	//subreport
-	public static SubreportBuilder subreport(ReportBuilder<?> reportBuilder) {
-		return new SubreportBuilder().setReport(reportBuilder);
+	public static SubreportBuilder subreport(JasperReportBuilder reportBuilder) {
+		SubreportBuilder subreport = new SubreportBuilder();
+		subreport.setReport(reportBuilder);
+		if (reportBuilder.getConnection() != null) {
+			subreport.setConnection(reportBuilder.getConnection());
+		}
+		if (reportBuilder.getDataSource() != null) {
+			subreport.setDataSource(reportBuilder.getDataSource());
+		}
+		return subreport;
 	}
 
 	public static SubreportBuilder subreport(JasperReport jasperReport) {

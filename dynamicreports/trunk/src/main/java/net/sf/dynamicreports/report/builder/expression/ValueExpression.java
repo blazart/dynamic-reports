@@ -33,18 +33,29 @@ public class ValueExpression<T> extends AbstractSimpleExpression<T> {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 	
 	private T value;
+	private Class<? super T> valueClass;
 
 	public ValueExpression(T value) {
-		this.value = value;		
+		this(value, null);		
+	}
+
+	@SuppressWarnings("unchecked")
+	public ValueExpression(T value, Class<? super T> valueClass) {
+		this.value = value;
+		if (valueClass == null) {
+			this.valueClass = (Class<? super T>) value.getClass();
+		}
+		else {
+			this.valueClass = valueClass;
+		}
 	}
 	
 	public T evaluate(ReportParameters reportParameters) {
 		return value;
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
-	public Class<T> getValueClass() {
-		return (Class<T>) value.getClass();
+	public Class<? super T> getValueClass() {
+		return valueClass;
 	}
 }

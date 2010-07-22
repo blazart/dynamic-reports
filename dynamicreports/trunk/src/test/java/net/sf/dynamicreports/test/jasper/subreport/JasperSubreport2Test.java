@@ -23,33 +23,38 @@ package net.sf.dynamicreports.test.jasper.subreport;
 
 import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 
+import java.io.InputStream;
 import java.io.Serializable;
 
+import junit.framework.Assert;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
-import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.builder.component.SubreportBuilder;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.test.jasper.AbstractJasperValueTest;
 import net.sf.dynamicreports.test.jasper.DataSource;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JREmptyDataSource;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class Subreport2Test extends AbstractJasperValueTest implements Serializable {
+public class JasperSubreport2Test extends AbstractJasperValueTest implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
-	private TextColumnBuilder<String> column1;
-	private TextColumnBuilder<String> column2;
 	
 	@Override
 	protected void configureReport(JasperReportBuilder rb) {
 		SubreportBuilder detailSubreport = cmp.subreport(detailSubreport())
     .setDataSource(new SubreportDataSourceExpression());
 		
-		rb.title(cmp.subreport(titleSubreport()))
+		SubreportBuilder titleSubreport = cmp.subreport(titleSubreport())
+		.setDataSource(titleSubreportDataSource());
+		
+		rb.title(titleSubreport)
 		  .detail(detailSubreport);
 	}
 
@@ -62,15 +67,15 @@ public class Subreport2Test extends AbstractJasperValueTest implements Serializa
 		elementCountTest("detail.subreport1", 3);
 
 		//title subreport
-		columnDetailCountTest(column1, 3);
-		columnDetailValueTest(column1,	"value1", "value2", "value3");
+		elementCountTest("detail.column_field11", 3);
+		elementValueTest("detail.column_field11",	"value1", "value2", "value3");
 		
 		//detail subreport
 		elementCountTest("title.textField1", 3);
 		elementValueTest("title.textField1", "Subreport1", "Subreport2", "Subreport3");
 		
-		columnDetailCountTest(column2, 6);
-		columnDetailValueTest(column2,	"1_1", "1_2", "2_1", "2_2", "3_1", "3_2");
+		elementCountTest("detail.column_simpleExpression_0_1", 6);
+		elementValueTest("detail.column_simpleExpression_0_1",	"1_1", "1_2", "2_1", "2_2", "3_1", "3_2");
 	}
 	
 	@Override
@@ -78,22 +83,26 @@ public class Subreport2Test extends AbstractJasperValueTest implements Serializa
 		return new JREmptyDataSource(3);
 	}
 	
-	private JasperReportBuilder titleSubreport() {
-		JasperReportBuilder report = report();
-		column1 = col.column("Column1", "field1", type.stringType());
-		report
-		  .columns(column1)
-		  .setDataSource(titleSubreportDataSource());
-		return report;
+	private JasperReport titleSubreport() {
+		try {
+			InputStream is = JasperSubreportTest.class.getResourceAsStream("titlesubreport.jrxml");
+			return JasperCompileManager.compileReport(JRXmlLoader.load(is));
+		} catch (JRException e) {
+			e.printStackTrace();
+			Assert.fail(e.getMessage());
+			return null;
+		}
 	}
 	
-	private JasperReportBuilder detailSubreport() {
-		JasperReportBuilder report = report();
-		column2 = col.column(new ValueExpression());
-		report		   
-		  .columns(column2)
-		  .title(cmp.text(new SubreportTitleExpression()));
-		return report;
+	private JasperReport detailSubreport() {
+		try {
+			InputStream is = JasperSubreportTest.class.getResourceAsStream("detailsubreport.jrxml");
+			return JasperCompileManager.compileReport(JRXmlLoader.load(is));
+		} catch (JRException e) {
+			e.printStackTrace();
+			Assert.fail(e.getMessage());
+			return null;
+		}
 	}
 	
 	private JRDataSource titleSubreportDataSource() {
@@ -110,21 +119,5 @@ public class Subreport2Test extends AbstractJasperValueTest implements Serializa
 		public JRDataSource evaluate(ReportParameters reportParameters) {
 			return new JREmptyDataSource(2);
 		}
-	}
-	
-	private class SubreportTitleExpression extends AbstractSimpleExpression<String> {
-		private static final long serialVersionUID = 1L;
-
-		public String evaluate(ReportParameters reportParameters) {			
-			return "Subreport" + reportParameters.getMasterParameters().getReportRowNumber();
-		}
-	}
-	
-	private class ValueExpression extends AbstractSimpleExpression<String> {
-		private static final long serialVersionUID = 1L;
-
-		public String evaluate(ReportParameters reportParameters) {
-			return reportParameters.getMasterParameters().getReportRowNumber() + "_" + reportParameters.getReportRowNumber();
-		}		
 	}
 }

@@ -30,8 +30,8 @@ import net.sf.dynamicreports.report.builder.expression.AddExpression;
 import net.sf.dynamicreports.report.builder.expression.DivideExpression;
 import net.sf.dynamicreports.report.builder.expression.Expressions;
 import net.sf.dynamicreports.report.builder.expression.MultiplyExpression;
-import net.sf.dynamicreports.report.builder.expression.NumberExpression;
 import net.sf.dynamicreports.report.builder.expression.SubtractExpression;
+import net.sf.dynamicreports.report.builder.expression.ValueExpression;
 import net.sf.dynamicreports.report.constant.Constants;
 import net.sf.dynamicreports.report.definition.DRIValue;
 import net.sf.dynamicreports.report.definition.expression.DRIComplexExpression;
@@ -74,7 +74,7 @@ public class TextColumnBuilder<T> extends ColumnBuilder<TextColumnBuilder<T>, T>
 	public TextColumnBuilder<BigDecimal> add(Number number) {
 		Validate.isTrue(Number.class.isAssignableFrom(getObject().getValueClass()), "Only Number column can multiply");
 		DRIExpression<? extends Number> value1Expression = (DRIExpression<? extends Number>) this.getObject().getValueField().getValueExpression();
-		NumberExpression<Number> value2Expression = Expressions.number(number);
+		ValueExpression<Number> value2Expression = Expressions.number(number);
 		AddExpression exp = new AddExpression(value1Expression, value2Expression);
 		return new TextColumnBuilder<BigDecimal>(exp).setDataType(type.bigDecimalType());
 	}
@@ -93,7 +93,7 @@ public class TextColumnBuilder<T> extends ColumnBuilder<TextColumnBuilder<T>, T>
 	public TextColumnBuilder<BigDecimal> subtract(Number number) {
 		Validate.isTrue(Number.class.isAssignableFrom(getObject().getValueClass()), "Only Number column can subtract");
 		DRIExpression<? extends Number> value1Expression = (DRIExpression<? extends Number>) this.getObject().getValueField().getValueExpression();
-		NumberExpression<Number> value2Expression = Expressions.number(number);
+		ValueExpression<Number> value2Expression = Expressions.number(number);
 		SubtractExpression exp = new SubtractExpression(value1Expression, value2Expression);
 		return new TextColumnBuilder<BigDecimal>(exp).setDataType(type.bigDecimalType());
 	}
@@ -112,7 +112,7 @@ public class TextColumnBuilder<T> extends ColumnBuilder<TextColumnBuilder<T>, T>
 	public TextColumnBuilder<BigDecimal> multiply(Number number) {
 		Validate.isTrue(Number.class.isAssignableFrom(getObject().getValueClass()), "Only Number column can multiply");
 		DRIExpression<? extends Number> value1Expression = (DRIExpression<? extends Number>) this.getObject().getValueField().getValueExpression();
-		NumberExpression<Number> value2Expression = Expressions.number(number);
+		ValueExpression<Number> value2Expression = Expressions.number(number);
 		MultiplyExpression exp = new MultiplyExpression(value1Expression, value2Expression);
 		return new TextColumnBuilder<BigDecimal>(exp).setDataType(type.bigDecimalType());
 	}
@@ -131,7 +131,7 @@ public class TextColumnBuilder<T> extends ColumnBuilder<TextColumnBuilder<T>, T>
 	public TextColumnBuilder<BigDecimal> divide(int scale, Number number) {
 		Validate.isTrue(Number.class.isAssignableFrom(getObject().getValueClass()), "Only Number column can divide");
 		DRIExpression<? extends Number> value1Expression = (DRIExpression<? extends Number>) this.getObject().getValueField().getValueExpression();
-		NumberExpression<Number> value2Expression = Expressions.number(number);
+		ValueExpression<Number> value2Expression = Expressions.number(number);
 		DivideExpression exp = new DivideExpression(scale, value1Expression, value2Expression);
 		return new TextColumnBuilder<BigDecimal>(exp).setDataType(type.bigDecimalType());
 	}

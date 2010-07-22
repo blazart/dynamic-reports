@@ -123,7 +123,7 @@ public class SubreportPositionTest extends AbstractJasperPositionTest implements
 			JasperReportBuilder report = report();
 			report
 			  .setPageMargin(margin(0))
-			  .title(cmp.text("Master" + masterRowNumber));
+			  .title(cmp.text("Subreport" + masterRowNumber));
 			
 			for (int i = 1; i <= masterRowNumber; i++) {
 			  report.addColumn(col.column("Column" + i, "column" + i, type.stringType()));

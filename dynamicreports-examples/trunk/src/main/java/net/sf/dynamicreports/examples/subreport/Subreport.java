@@ -37,7 +37,6 @@ import net.sf.jasperreports.engine.JREmptyDataSource;
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
 public class Subreport {
-	private int count = 1;
 	
 	public Subreport() {
 		build();
@@ -69,35 +68,35 @@ public class Subreport {
 		private static final long serialVersionUID = 1L;
 
 		public JasperReportBuilder evaluate(ReportParameters reportParameters) {
+			int masterRowNumber = reportParameters.getReportRowNumber();
 			JasperReportBuilder report = report();
 			report
 			  .setTemplate(Templates.reportTemplate)
 			  .setPageMargin(margin(0))
-			  .title(cmp.text("Master" + count).setStyle(Templates.bold12CenteredStyle));
+			  .title(cmp.text("Subreport" + masterRowNumber).setStyle(Templates.bold12CenteredStyle));
 			
-			for (int i = 1; i <= count; i++) {
+			for (int i = 1; i <= masterRowNumber; i++) {
 			  report.addColumn(col.column("Column" + i, "column" + i, type.stringType()));
 			}
 			
-			count++;
 			return report;
 		}
-
 	}	
 	
 	private class SubreportDataSourceExpression extends AbstractSimpleExpression<JRDataSource> {
 		private static final long serialVersionUID = 1L;
 
 		public JRDataSource evaluate(ReportParameters reportParameters) {
-			String[] columns = new String[count];
-			for (int i = 1; i <= count; i++) {
+			int masterRowNumber = reportParameters.getReportRowNumber();
+			String[] columns = new String[masterRowNumber];
+			for (int i = 1; i <= masterRowNumber; i++) {
 				columns[i - 1] = "column" + i;
 			}
 			DataSource dataSource = new DataSource(columns);
 			
-			for (int i = 1; i <= count; i++) {
-				Object[] values = new Object[count];
-				for (int j = 1; j <= count; j++) {
+			for (int i = 1; i <= masterRowNumber; i++) {
+				Object[] values = new Object[masterRowNumber];
+				for (int j = 1; j <= masterRowNumber; j++) {
 					values[j - 1] = "row" + i + "_column" + j;
 				}	
 				dataSource.add(values);
