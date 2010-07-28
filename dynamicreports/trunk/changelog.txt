@@ -1,6 +1,10 @@
 DynamicReports Change Log
 =========================
 
+Changes in version 1.4.0 
+---------------------------------------------------
+- subreports support, see TitleSubreport, DetailDynamicSubreport for an example
+
 Changes in version 1.3.0 (2010-07-19)
 ---------------------------------------------------
 - barcode support, see ShippingLabel for an example

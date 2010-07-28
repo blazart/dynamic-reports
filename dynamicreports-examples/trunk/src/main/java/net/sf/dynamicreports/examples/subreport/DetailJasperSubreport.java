@@ -22,9 +22,12 @@
 package net.sf.dynamicreports.examples.subreport;
 
 import static net.sf.dynamicreports.report.builder.DynamicReports.*;
+
+import java.io.InputStream;
+import java.math.BigDecimal;
+
 import net.sf.dynamicreports.examples.DataSource;
 import net.sf.dynamicreports.examples.Templates;
-import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
 import net.sf.dynamicreports.report.builder.component.Components;
 import net.sf.dynamicreports.report.builder.component.SubreportBuilder;
@@ -32,23 +35,26 @@ import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JREmptyDataSource;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperReport;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
  */
-public class Subreport {
+public class DetailJasperSubreport {
 	
-	public Subreport() {
+	public DetailJasperSubreport() {
 		build();
 	}
 	
 	private void build() {
-		SubreportBuilder subreport = Components.subreport(new SubreportExpression())
-		                                       .setDataSource(new SubreportDataSourceExpression());
-		
-		try {			
+		try {
+			SubreportBuilder subreport = Components.subreport(getJasperSubreport())
+			                                       .setDataSource(new SubreportDataSourceExpression());
+			
 			report()
-			  .title(Templates.createTitleComponent("Subreport"))
+			  .title(Templates.createTitleComponent("DetailJasperSubreport"))
 			  .detail(
 			  	subreport,
 			  	cmp.filler().setFixedHeight(20))
@@ -57,56 +63,33 @@ public class Subreport {
 			  .show();
 		} catch (DRException e) {
 			e.printStackTrace();
+		} catch (JRException e) {
+			e.printStackTrace();
 		}
 	}
 	
 	private JRDataSource createDataSource() {
-		return new JREmptyDataSource(5);
-	}	
+		return new JREmptyDataSource(3);
+	}
 	
-	private class SubreportExpression extends AbstractSimpleExpression<JasperReportBuilder> {
-		private static final long serialVersionUID = 1L;
-
-		public JasperReportBuilder evaluate(ReportParameters reportParameters) {
-			int masterRowNumber = reportParameters.getReportRowNumber();
-			JasperReportBuilder report = report();
-			report
-			  .setTemplate(Templates.reportTemplate)
-			  .setPageMargin(margin(0))
-			  .title(cmp.text("Subreport" + masterRowNumber).setStyle(Templates.bold12CenteredStyle));
-			
-			for (int i = 1; i <= masterRowNumber; i++) {
-			  report.addColumn(col.column("Column" + i, "column" + i, type.stringType()));
-			}
-			
-			return report;
-		}
-	}	
+	private JasperReport getJasperSubreport() throws JRException {
+		InputStream is = DetailJasperSubreport.class.getResourceAsStream("subreport.jrxml");
+		return JasperCompileManager.compileReport(is);
+	}
 	
 	private class SubreportDataSourceExpression extends AbstractSimpleExpression<JRDataSource> {
 		private static final long serialVersionUID = 1L;
 
 		public JRDataSource evaluate(ReportParameters reportParameters) {
-			int masterRowNumber = reportParameters.getReportRowNumber();
-			String[] columns = new String[masterRowNumber];
-			for (int i = 1; i <= masterRowNumber; i++) {
-				columns[i - 1] = "column" + i;
+			DataSource dataSource = new DataSource("item", "quantity", "unitprice");
+			for (int i = 0; i < 5; i++) {
+				dataSource.add("Book", (int) (Math.random() * 10) + 1, new BigDecimal(Math.random() * 100 + 1));
 			}
-			DataSource dataSource = new DataSource(columns);
-			
-			for (int i = 1; i <= masterRowNumber; i++) {
-				Object[] values = new Object[masterRowNumber];
-				for (int j = 1; j <= masterRowNumber; j++) {
-					values[j - 1] = "row" + i + "_column" + j;
-				}	
-				dataSource.add(values);
-			}
-			
 			return dataSource;
 		}
 	}
 	
 	public static void main(String[] args) {
-		new Subreport();
+		new DetailJasperSubreport();
 	}
 }

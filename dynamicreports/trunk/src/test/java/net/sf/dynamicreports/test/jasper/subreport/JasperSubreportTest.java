@@ -37,7 +37,6 @@ import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.xml.JRXmlLoader;
 
 /**
  * @author Ricardo Mariaca (dynamicreports@gmail.com)
@@ -103,7 +102,7 @@ public class JasperSubreportTest extends AbstractJasperValueTest implements Seri
 		public JasperReport evaluate(ReportParameters reportParameters) {
 			try {
 				InputStream is = JasperSubreportTest.class.getResourceAsStream("subreport" + reportParameters.getReportRowNumber() + ".jrxml");
-				return JasperCompileManager.compileReport(JRXmlLoader.load(is));
+				return JasperCompileManager.compileReport(is);
 			} catch (JRException e) {
 				e.printStackTrace();
 				Assert.fail(e.getMessage());
